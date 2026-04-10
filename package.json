@@ -1,0 +1,23 @@
+{
+  "name": "@gamedev.upc/vilahack-sdk",
+  "version": "0.4.0",
+  "description": "The official TypeScript SDK for Vilahack",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build"
+  },
+  "files": [
+    "dist"
+  ],
+  "author": "Joel Esteller Planesas",
+  "license": "MIT",
+  "homepage": "https://github.com/GameDEV-UPC/vilahack-sdk",
+  "devDependencies": {
+    "@types/node": "^25.6.0",
+    "prettier": "^3.8.2",
+    "typescript": "^6.0.2"
+  }
+}
