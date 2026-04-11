@@ -40,10 +40,10 @@ Once configured, simply import your vilahack instance into any file to make stri
 import { vilahack } from "@lib/vilahack";
 
 // User Module
-const userResponse = await vilahack.user.getUser()
+const userResponse = await vilahack.user.get()
 
 // Team Module
-const teamResponse = await vilahack.team.getTeam()
+const teamResponse = await vilahack.team.get()
 ```
 
 ## Importing TypeScript
