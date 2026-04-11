@@ -14,37 +14,46 @@ npm install @gamedev.upc/vilahack-sdk
 
 ## Usage
 
-To use the SDK, you'll need to configure it with your API base URL and authentication function.
+The SDK uses a client instance pattern. You must create and configure a single instance of the client to use throughout your application.
 
-In this example setup, we're using Supabase as an example authentication provider:
+In this example, we configure the SDK and use Supabase to dynamically inject the freshest authentication token into every request.
 
 ```ts
-// lib/vilahack.ts
-import { setConfig } from "@gamedev.upc/vilahack-sdk";
+// src/lib/vilahack.ts
+import { createClient } from "@gamedev.upc/vilahack-sdk";
 import { supabase } from "./supabase";
 import { API_URL } from "@constants/api";
 
-setConfig({
+// Create and export the configured client
+export const vilahack = createClient({
   baseUrl: API_URL,
   getToken: async () => {
-    const {
-      data: { session },
-    } = await supabase.auth.getSession();
+    const { data: { session } } = await supabase.auth.getSession();
     return session?.access_token || null;
   },
 });
-
-export * from "@gamedev.upc/vilahack-sdk";
 ```
 
-After the configuration is set up, you must make sure to import your SDK methods from this new file rather than the raw package. This guarantees the SDK is configured before any API calls are made:
+Once configured, simply import your vilahack instance into any file to make strictly-typed API calls.
 
 ```ts
-// BAD: Bypasses your configuration
-import { User } from "@gamedev.upc/vilahack-sdk";
+import { vilahack } from "@lib/vilahack";
 
-// GOOD: Uses your configured instance
-import { User, Team } from "@lib/vilahack";
+// User Module
+const userResponse = await vilahack.user.getUser()
 
-// Now you can make API calls!
-const response = await User.getUser("user_123");
+// Team Module
+const teamResponse = await vilahack.team.getTeam()
+```
+
+## Importing TypeScript
+
+Because types are completely separate from your configured instance, you should import them directly from the raw package using the import type syntax.
+
+```ts
+// User Types
+import type { GetUserError } from "@gamedev.upc/vilahack-sdk/user"
+
+// Team Types
+import type { GetTeamError } from "@gamedev.upc/vilahack-sdk/team"
+```

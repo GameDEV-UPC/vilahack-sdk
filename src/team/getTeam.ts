@@ -1,9 +1,10 @@
+import type { Config } from "../config.js";
 import { API_ROUTES } from "../routes.js";
-import { fetchClient } from "../client.js";
+import { fetchClient } from "../utils/fetchClient.js";
 import type { GetTeamResponse, TeamResponse } from "./types.js";
 
-export async function getTeam(): Promise<GetTeamResponse> {
-  const result = await fetchClient<TeamResponse>(API_ROUTES.TEAM.GET, {
+export async function getTeam(config: Config): Promise<GetTeamResponse> {
+  const result = await fetchClient<TeamResponse>(config, API_ROUTES.TEAM.GET, {
     method: "GET",
   });
 

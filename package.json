@@ -1,10 +1,27 @@
 {
   "name": "@gamedev.upc/vilahack-sdk",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "The official TypeScript SDK for Vilahack",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./team": {
+      "types": "./dist/team/index.d.ts",
+      "import": "./dist/team/index.js",
+      "default": "./dist/team/index.js"
+    },
+    "./user": {
+      "types": "./dist/user/index.d.ts",
+      "import": "./dist/user/index.js",
+      "default": "./dist/user/index.js"
+    }
+  },
   "scripts": {
     "build": "tsc",
     "prepare": "npm run build"

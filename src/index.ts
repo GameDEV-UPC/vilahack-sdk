@@ -1,5 +1,6 @@
-export * as User from "./user/index.js";
-export * as Team from "./team/index.js";
-export * from "./types.js";
-export * from "./config.js";
-export * from "./client.js";
+import { VilahackClient } from "./client.js";
+import type { Config } from "./config.js";
+
+export function createClient(config: Config) {
+  return new VilahackClient(config);
+}

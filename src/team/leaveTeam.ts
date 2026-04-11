@@ -1,9 +1,10 @@
+import type { Config } from "../config.js";
 import { API_ROUTES } from "../routes.js";
-import { fetchClient } from "../client.js";
+import { fetchClient } from "../utils/fetchClient.js";
 import type { LeaveTeamResponse } from "./types.js";
 
-export async function leaveTeam(): Promise<LeaveTeamResponse> {
-  const result = await fetchClient<void>(API_ROUTES.TEAM.LEAVE, {
+export async function leaveTeam(config: Config): Promise<LeaveTeamResponse> {
+  const result = await fetchClient<void>(config, API_ROUTES.TEAM.LEAVE, {
     method: "PUT",
   });
 
