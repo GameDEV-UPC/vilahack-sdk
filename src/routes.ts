@@ -12,6 +12,6 @@ export const API_ROUTES = {
   PUZZLE: {
     GET: (puzzleId: string) => `/puzzle/${puzzleId}`,
     GET_ALL: "/puzzle/all",
-    GET_ALL_BY_CATEGORY: "/puzzle/all/category",
+    GET_ALL_BY_CATEGORY: "/puzzle/all/by_category",
   },
 } as const;
