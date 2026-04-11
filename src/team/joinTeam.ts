@@ -1,10 +1,11 @@
+import type { Config } from "../config.js";
 import { API_ROUTES } from "../routes.js";
-import { fetchClient } from "../client.js";
+import { fetchClient } from "../utils/fetchClient.js";
 import type { JoinTeamResponse, TeamResponse } from "./types.js";
 
-export async function joinTeam(data: string): Promise<JoinTeamResponse> {
+export async function joinTeam(config: Config, data: string): Promise<JoinTeamResponse> {
   const safeId = encodeURIComponent(data);
-  const result = await fetchClient<TeamResponse>(API_ROUTES.TEAM.JOIN(safeId), {
+  const result = await fetchClient<TeamResponse>(config, API_ROUTES.TEAM.JOIN(safeId), {
     method: "PUT",
   });
 

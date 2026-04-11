@@ -1,10 +1,11 @@
+import type { Config } from "../config.js";
 import { API_ROUTES } from "../routes.js";
-import { fetchClient } from "../client.js";
+import { fetchClient } from "../utils/fetchClient.js";
 import type { CreateTeamResponse } from "./types.js";
 
-export async function createTeam(teamName: string): Promise<CreateTeamResponse> {
+export async function createTeam(config: Config, teamName: string): Promise<CreateTeamResponse> {
   const safeName = encodeURIComponent(teamName);
-  const result = await fetchClient<string>(API_ROUTES.TEAM.CREATE(safeName), {
+  const result = await fetchClient<string>(config, API_ROUTES.TEAM.CREATE(safeName), {
     method: "PUT",
   });
 

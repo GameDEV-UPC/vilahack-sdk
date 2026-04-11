@@ -1,9 +1,10 @@
 import { API_ROUTES } from "../routes.js";
-import { fetchClient } from "../client.js";
+import type { Config } from "../config.js";
+import { fetchClient } from "../utils/fetchClient.js";
 import type { GetUserResponse, UserProfile } from "./types.js";
 
-export async function getUser(): Promise<GetUserResponse> {
-  const result = await fetchClient<UserProfile>(API_ROUTES.USER.GET, {
+export async function getUser(config: Config): Promise<GetUserResponse> {
+  const result = await fetchClient<UserProfile>(config, API_ROUTES.USER.GET, {
     method: "GET",
   });
 
