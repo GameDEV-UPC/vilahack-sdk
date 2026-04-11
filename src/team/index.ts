@@ -1,3 +1,5 @@
+export * from "./types.js";
+
 import type { Config } from "../config.js";
 import { createTeam } from "./createTeam.js";
 import { getTeam } from "./getTeam.js";

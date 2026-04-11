@@ -1,5 +1,6 @@
-import type { Config } from "../config.js";
+export * from "./types.js";
 
+import type { Config } from "../config.js";
 import { getUser } from "./getUser.js";
 import { signUp } from "./signUp.js";
 import type { SignUpRequest } from "./types.js";
