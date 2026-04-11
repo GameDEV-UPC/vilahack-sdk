@@ -3,6 +3,6 @@ export * from "./types.js";
 import { VilahackClient } from "./client.js";
 import type { Config } from "./config.js";
 
-export function createClient(config: Config) {
+export function createClient(config: Config): VilahackClient {
   return new VilahackClient(config);
 }
