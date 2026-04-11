@@ -1,9 +1,10 @@
+import type { Config } from "../config.js";
 import { API_ROUTES } from "../routes.js";
-import { fetchClient } from "../client.js";
+import { fetchClient } from "../utils/fetchClient.js";
 import type { SignUpRequest, SignUpResponse } from "./types.js";
 
-export async function signUp(data: SignUpRequest): Promise<SignUpResponse> {
-  const result = await fetchClient<void>(API_ROUTES.USER.SIGNUP, {
+export async function signUp(config: Config, data: SignUpRequest): Promise<SignUpResponse> {
+  const result = await fetchClient<void>(config, API_ROUTES.USER.SIGNUP, {
     method: "PUT",
     body: JSON.stringify(data),
   });
