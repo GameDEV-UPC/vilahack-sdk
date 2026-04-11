@@ -4,7 +4,7 @@ This folder contains a couple of examples to integrate vilahack-sdk to the front
 
 To use the examples you need to have acces to Vilahack and Supabases API's. Then copy .env-template to .env and fill variables.
 
-> [!WARN]
+> [!WARNING]
 > Be carefull and don't push any private keys to the repo.
 
 ## Examples
