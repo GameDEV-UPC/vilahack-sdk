@@ -41,8 +41,10 @@ export async function fetchClient<T = void>(
       headers,
     });
 
+    const contentType = response.headers.get("Content-Type") || "";
+    const rawText = await response.text();
+
     if (!response.ok) {
-      const rawText = await response.text();
       try {
         const errorPayload = JSON.parse(rawText) as ApiErrorResponse;
         return { success: false, status: response.status, error: errorPayload };
@@ -57,8 +59,14 @@ export async function fetchClient<T = void>(
         };
       }
     }
-    const rawText = await response.text();
-    const data = rawText ? (JSON.parse(rawText) as T) : ({} as T);
+
+    let data: T;
+    if (contentType.includes("application/json")) {
+      data = rawText ? (JSON.parse(rawText) as T) : ({} as T);
+    } else {
+      data = rawText as unknown as T;
+    }
+
     return { success: true, status: response.status, data };
   } catch (error) {
     return {

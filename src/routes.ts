@@ -2,6 +2,9 @@ export const API_ROUTES = {
   USER: {
     GET: "/user/application",
     SIGNUP: "/user/application",
+    UPDATE: "/user/application/update",
+    CHECKIN: "/user/check_in",
+    QR: "/user/qr.svg",
   },
   TEAM: {
     GET: "/team",
