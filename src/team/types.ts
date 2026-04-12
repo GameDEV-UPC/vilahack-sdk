@@ -1,4 +1,4 @@
-import type { GlobalError, ServiceResponse } from "../types.js";
+import type { GlobalError } from "../types.js";
 
 export interface TeamResponse {
   name: string;
@@ -6,18 +6,26 @@ export interface TeamResponse {
   members: string[];
 }
 
-export type CreateTeamErrorCode = GlobalError | "TEAM_ALREADY_EXISTS";
+export type CreateTeamError = GlobalError | "TEAM_ALREADY_EXISTS";
 
-export type GetTeamErrorCode = GlobalError | "TEAM_NOT_FOUND";
+export type GetTeamError = GlobalError | "TEAM_NOT_FOUND";
 
-export type JoinTeamErrorCode = GlobalError | "TEAM_NOT_FOUND" | "ALREADY_IN_TEAM" | "TEAM_FULL";
+export type JoinTeamError = GlobalError | "TEAM_NOT_FOUND" | "ALREADY_IN_TEAM" | "TEAM_FULL";
 
-export type LeaveTeamErrorCode = GlobalError | "NOT_ON_TEAM";
+export type LeaveTeamError = GlobalError | "NOT_ON_TEAM";
 
-export type CreateTeamResponse = ServiceResponse<string, CreateTeamErrorCode>;
+export type CreateTeamResponse =
+  | { success: true; data: string }
+  | { success: false; code: CreateTeamError; message?: string };
 
-export type GetTeamResponse = ServiceResponse<TeamResponse, GetTeamErrorCode>;
+export type GetTeamResponse =
+  | { success: true; data: TeamResponse }
+  | { success: false; code: GetTeamError; message?: string };
 
-export type JoinTeamResponse = ServiceResponse<TeamResponse, JoinTeamErrorCode>;
+export type JoinTeamResponse =
+  | { success: true; data: TeamResponse }
+  | { success: false; code: JoinTeamError; message?: string };
 
-export type LeaveTeamResponse = ServiceResponse<void, LeaveTeamErrorCode>;
+export type LeaveTeamResponse =
+  | { success: true }
+  | { success: false; code: LeaveTeamError; message?: string };

@@ -27,7 +27,7 @@ export class TeamModule {
     return createTeam(this.config, teamName);
   }
 
-  public async join(teamId: string): Promise<JoinTeamResponse> {
-    return joinTeam(this.config, teamId);
+  public async join(teamName: string): Promise<JoinTeamResponse> {
+    return joinTeam(this.config, teamName);
   }
 }
