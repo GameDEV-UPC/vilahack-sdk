@@ -1,4 +1,4 @@
-import type { GlobalError } from "../types.js";
+import type { GlobalError, ServiceResponse } from "../types.js";
 
 export type Gender = "man" | "woman" | "nonbinary" | "agender" | "other" | "unspecified";
 
@@ -36,15 +36,16 @@ export interface UserProfile {
   status: Status;
 }
 
+export interface GetUserRequest {
+  id?: string;
+  qr?: string;
+}
+
 export type SignUpRequest = Omit<UserProfile, "created_at" | "check_in" | "status">;
 
-export type SignUpError = GlobalError | "EMAIL_ALREADY_IN_USE";
-export type GetUserError = GlobalError | "USER_NOT_FOUND";
+export type SignUpErrorCode = GlobalError | "EMAIL_ALREADY_IN_USE";
+export type GetUserErrorCode = GlobalError | "USER_NOT_FOUND";
 
-export type SignUpResponse =
-  | { success: true }
-  | { success: false; code: SignUpError; message?: string };
+export type SignUpResponse = ServiceResponse<void, SignUpErrorCode>;
 
-export type GetUserResponse =
-  | { success: true; data: UserProfile }
-  | { success: false; code: GetUserError; message?: string };
+export type GetUserResponse = ServiceResponse<UserProfile, GetUserErrorCode>;

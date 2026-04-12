@@ -1,37 +1,23 @@
 import { API_ROUTES } from "../routes.js";
 import type { Config } from "../config.js";
 import { fetchClient } from "../utils/fetchClient.js";
-import type { GetUserResponse, UserProfile } from "./types.js";
+import type { GetUserErrorCode, GetUserRequest, GetUserResponse, UserProfile } from "./types.js";
+import { COMMON_ERRORS } from "../constants/api.js";
+import { mapServiceError } from "../utils/errorHandler.js";
 
-export async function getUser(config: Config): Promise<GetUserResponse> {
+const GET_USER_ERRORS: Record<number, GetUserErrorCode> = {
+  ...COMMON_ERRORS,
+  404: "USER_NOT_FOUND",
+};
+
+export async function getUser(config: Config, data: GetUserRequest): Promise<GetUserResponse> {
   const result = await fetchClient<UserProfile>(config, API_ROUTES.USER.GET, {
     method: "GET",
+    params: data as Record<string, string | number | undefined>,
   });
 
   if (!result.success) {
-    if (result.status === 401) {
-      return {
-        success: false,
-        code: "UNAUTHORIZED",
-        message: result.error.message,
-      };
-    }
-    if (result.status === 404) {
-      return {
-        success: false,
-        code: "USER_NOT_FOUND",
-        message: result.error.message,
-      };
-    }
-    if (result.status === 503) {
-      return { success: false, code: "NETWORK_ERROR" };
-    }
-
-    return {
-      success: false,
-      code: "SERVER_ERROR",
-      message: result.error.message,
-    };
+    return mapServiceError<GetUserErrorCode>(result, GET_USER_ERRORS);
   }
 
   return { success: true, data: result.data };

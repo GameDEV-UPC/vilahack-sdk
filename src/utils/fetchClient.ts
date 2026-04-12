@@ -1,12 +1,26 @@
 import type { Config } from "../config.js";
 import type { ApiResponse, ApiErrorResponse } from "../types.js";
 
+interface FetchOptions extends RequestInit {
+  params?: Record<string, string | number | undefined>;
+}
+
 export async function fetchClient<T = void>(
   config: Config,
   endpointPath: string,
-  options: RequestInit = {},
+  options: FetchOptions = {},
 ): Promise<ApiResponse<T>> {
   try {
+    const { params, ...requestInit } = options;
+
+    const url = new URL(endpointPath, config.baseUrl);
+
+    if (params) {
+      Object.entries(params).forEach(([key, value]) => {
+        if (value !== undefined) url.searchParams.append(key, value.toString());
+      });
+    }
+
     const token = await config.getToken();
 
     const headers = new Headers(options.headers);
@@ -15,13 +29,13 @@ export async function fetchClient<T = void>(
       headers.set("Authorization", `Bearer ${token}`);
     }
 
-    const isFormData = options.body instanceof FormData;
+    const isFormData = requestInit.body instanceof FormData;
     if (!isFormData && !headers.has("Content-Type")) {
       headers.set("Content-Type", "application/json");
     }
 
-    const response = await fetch(`${config.baseUrl}${endpointPath}`, {
-      ...options,
+    const response = await fetch(url.toString(), {
+      ...requestInit,
       headers,
     });
 
