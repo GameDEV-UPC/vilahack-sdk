@@ -1,12 +1,13 @@
 import type { Config } from "../config.js";
-import { COMMON_ERRORS } from "../constants/api.js";
 import { API_ROUTES } from "../routes.js";
-import { mapServiceError } from "../utils/errorHandler.js";
 import { fetchClient } from "../utils/fetchClient.js";
-import type { GetPuzzleAllErrorCode, GetPuzzleAllResponse, Puzzle } from "./types.js";
+import type { GetPuzzleAllError, GetPuzzleAllResponse, Puzzle } from "./types.js";
 
-const GET_PUZZLE_ALL_ERRORS: Record<number, GetPuzzleAllErrorCode> = {
-  ...COMMON_ERRORS,
+const ERROR_MAP: Record<number, GetPuzzleAllError> = {
+  400: "INVALID_DATA",
+  401: "UNAUTHORIZED",
+  500: "SERVER_ERROR",
+  504: "NETWORK_ERROR",
 };
 
 export async function getPuzzleAll(config: Config): Promise<GetPuzzleAllResponse> {
@@ -15,7 +16,12 @@ export async function getPuzzleAll(config: Config): Promise<GetPuzzleAllResponse
   });
 
   if (!result.success) {
-    return mapServiceError<GetPuzzleAllErrorCode>(result, GET_PUZZLE_ALL_ERRORS);
+    const errorCode = ERROR_MAP[result.status] || "SERVER_ERROR";
+    return {
+      success: false,
+      code: errorCode,
+      message: result.error.message,
+    };
   }
 
   return { success: true, data: result.data };

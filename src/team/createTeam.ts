@@ -1,14 +1,7 @@
 import type { Config } from "../config.js";
-import { COMMON_ERRORS } from "../constants/api.js";
 import { API_ROUTES } from "../routes.js";
-import { mapServiceError } from "../utils/errorHandler.js";
 import { fetchClient } from "../utils/fetchClient.js";
-import type { CreateTeamErrorCode, CreateTeamResponse } from "./types.js";
-
-const CREATE_TEAM_ERRORS: Record<number, CreateTeamErrorCode> = {
-  ...COMMON_ERRORS,
-  412: "TEAM_ALREADY_EXISTS",
-};
+import type { CreateTeamResponse } from "./types.js";
 
 export async function createTeam(config: Config, teamName: string): Promise<CreateTeamResponse> {
   const safeName = encodeURIComponent(teamName);
@@ -17,7 +10,31 @@ export async function createTeam(config: Config, teamName: string): Promise<Crea
   });
 
   if (!result.success) {
-    return mapServiceError<CreateTeamErrorCode>(result, CREATE_TEAM_ERRORS);
+    if (result.status === 401 || result.status === 403) {
+      return { success: false, code: "UNAUTHORIZED" };
+    }
+
+    if (result.status === 412) {
+      return { success: false, code: "TEAM_ALREADY_EXISTS" };
+    }
+
+    if (result.status === 400) {
+      return {
+        success: false,
+        code: "INVALID_DATA",
+        message: result.error.message,
+      };
+    }
+
+    if (result.status === 503) {
+      return { success: false, code: "NETWORK_ERROR" };
+    }
+
+    return {
+      success: false,
+      code: "SERVER_ERROR",
+      message: result.error.message,
+    };
   }
 
   return { success: true, data: result.data };

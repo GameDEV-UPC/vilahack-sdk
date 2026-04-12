@@ -1,4 +1,4 @@
-// --- RAW BACKEND TYPES ---
+export type GlobalError = "UNAUTHORIZED" | "NETWORK_ERROR" | "SERVER_ERROR" | "INVALID_DATA";
 
 export type AuthErrorType =
   | "invalid_format"
@@ -38,18 +38,3 @@ export interface ApiErrorResponse {
 export type ApiResponse<T = void> =
   | { success: true; status: number; data: T }
   | { success: false; status: number; error: ApiErrorResponse };
-
-// --- SDK SERVICE TYPES (UI Wrappers) ---
-
-export type GlobalError = "UNAUTHORIZED" | "NETWORK_ERROR" | "SERVER_ERROR" | "INVALID_DATA";
-
-export interface ServiceError<TCode extends string> {
-  success: false;
-  code: TCode | GlobalError;
-  message?: string;
-  rawError: ApiErrorResponse;
-}
-
-export type ServiceResponse<TData, TCode extends string = never> =
-  | { success: true; data: TData }
-  | ServiceError<TCode>;
