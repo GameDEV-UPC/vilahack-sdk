@@ -1,8 +1,8 @@
 import inquirer from "inquirer"; // Terminal logging (for demostration propouses)
 import "dotenv/config"; // To load .env config
 
-import { setConfig, fetchClient } from "@gamedev.upc/vilahack-sdk";
-import { createClient } from "@supabase/supabase-js"; // Supabase connection library
+import { createClient as createClientVilahack } from "@gamedev.upc/vilahack-sdk";
+import { createClient as createClientSupabase } from "@supabase/supabase-js"; // Supabase connection library
 
 // SUPABASE SET UP
 // GET SUPABASE AUTH TOKEN
@@ -15,7 +15,7 @@ const supabaseAnonKey: string = process.env.SUPABASE_TEST_KEY as string;
 
 let supabaseUserAuth: string = ""; //we will change this later
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+export const supabase = createClientSupabase(supabaseUrl, supabaseAnonKey);
 
 async function getCredentials() {
   const credentials = await inquirer.prompt([
@@ -68,39 +68,28 @@ async function getSupabaseToken(): Promise<string | null> {
   return supabaseUserAuth; // Supabase token.
 }
 
-setConfig({
+export const vilahack = createClientVilahack({
   baseUrl: vilahackEndpoint,
   getToken: getSupabaseToken,
 });
 
-// EXAMPLE VILAHACK API CALL
+// EXAMPLE TO RETRIEVE DATA FROM VILAHACK
 
-async function testCall(): Promise<void> {
-  //Set recieving JSON
-  type Difficulty = "very_easy" | "easy" | "medium" | "hard" | "extreme";
+const puzzles = await vilahack.puzzle.getAll();
 
-  interface Puzzle {
-    id: string; // UUID
-    difficulty: Difficulty;
-    categories: string[];
-    points: number;
-    name: string;
-    prompt: string;
-    clues: string[];
-    start: string;
-    end: string;
-  }
-
-  //Fetch data
-  const response = await fetchClient<Puzzle[]>("/puzzle/all");
-
-  //Print data
-  if (response.success) {
-    console.log(response.data);
-    console.log(response.data);
-  } else {
-    console.error("Failed to load challenge:", response.error.message);
-  }
+//Print data
+if (puzzles.success) {
+  console.log(puzzles.data);
+} else {
+  console.error("Failed to load challenge:", puzzles.message);
 }
 
-testCall();
+// import User Types to use user interface
+import type { GetUserResponse } from "@gamedev.upc/vilahack-sdk/user";
+
+const user: GetUserResponse = await vilahack.user.get();
+if (user.success) {
+  console.log(user.data);
+} else {
+  console.log("Failed to retrieve user: ", user.message);
+}
