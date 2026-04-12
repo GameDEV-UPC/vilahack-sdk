@@ -1,7 +1,15 @@
 import type { Config } from "../config.js";
 import { API_ROUTES } from "../routes.js";
 import { fetchClient } from "../utils/fetchClient.js";
-import type { JoinTeamResponse, TeamResponse } from "./types.js";
+import type { JoinTeamErrorCode, JoinTeamResponse, TeamResponse } from "./types.js";
+
+import { mapServiceError } from "../utils/errorHandler.js";
+import { COMMON_ERRORS } from "../constants/api.js";
+
+const JOIN_TEAM_ERRORS: Record<number, JoinTeamErrorCode> = {
+  ...COMMON_ERRORS,
+  404: "TEAM_FULL",
+};
 
 export async function joinTeam(config: Config, data: string): Promise<JoinTeamResponse> {
   const safeId = encodeURIComponent(data);
@@ -10,29 +18,22 @@ export async function joinTeam(config: Config, data: string): Promise<JoinTeamRe
   });
 
   if (!result.success) {
-    if (result.status === 401) {
-      return { success: false, code: "UNAUTHORIZED" };
-    }
-
-    if (result.status === 404) {
-      return { success: false, code: "TEAM_FULL" };
-    }
-
     if (result.status === 412) {
-      if (typeof result.error.type === "object" && "database" in result.error.type) {
-        const backendMessage = result.error.message.toLowerCase();
+      const msg = result.error.message.toLowerCase();
 
-        if (backendMessage.includes("member_of_pkey")) {
-          return { success: false, code: "ALREADY_IN_TEAM" };
-        }
-        if (backendMessage.includes("member_of_team_fkey")) {
-          return { success: false, code: "TEAM_NOT_FOUND" };
-        }
-      }
-      return { success: false, code: "SERVER_ERROR" };
+      let specificCode: JoinTeamErrorCode = "SERVER_ERROR";
+      if (msg.includes("member_of_pkey")) specificCode = "ALREADY_IN_TEAM";
+      if (msg.includes("member_of_team_fkey")) specificCode = "TEAM_NOT_FOUND";
+
+      return {
+        success: false,
+        code: specificCode,
+        message: result.error.message,
+        rawError: result.error,
+      };
     }
 
-    return { success: false, code: "NETWORK_ERROR" };
+    return mapServiceError<JoinTeamErrorCode>(result, JOIN_TEAM_ERRORS);
   }
 
   return { success: true, data: result.data };

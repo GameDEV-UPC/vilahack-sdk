@@ -1,7 +1,14 @@
 import type { Config } from "../config.js";
 import { API_ROUTES } from "../routes.js";
 import { fetchClient } from "../utils/fetchClient.js";
-import type { LeaveTeamResponse } from "./types.js";
+import type { LeaveTeamErrorCode, LeaveTeamResponse } from "./types.js";
+import { mapServiceError } from "../utils/errorHandler.js";
+import { COMMON_ERRORS } from "../constants/api.js";
+
+const LEAVE_TEAM_ERRORS: Record<number, LeaveTeamErrorCode> = {
+  ...COMMON_ERRORS,
+  404: "NOT_ON_TEAM",
+};
 
 export async function leaveTeam(config: Config): Promise<LeaveTeamResponse> {
   const result = await fetchClient<void>(config, API_ROUTES.TEAM.LEAVE, {
@@ -9,20 +16,8 @@ export async function leaveTeam(config: Config): Promise<LeaveTeamResponse> {
   });
 
   if (!result.success) {
-    if (result.status === 401 || result.status === 403) {
-      return { success: false, code: "UNAUTHORIZED" };
-    }
-
-    if (result.status === 404) {
-      return { success: false, code: "NOT_ON_TEAM" };
-    }
-
-    return {
-      success: false,
-      code: "SERVER_ERROR",
-      message: result.error.message,
-    };
+    return mapServiceError<LeaveTeamErrorCode>(result, LEAVE_TEAM_ERRORS);
   }
 
-  return { success: true };
+  return { success: true, data: undefined };
 }
