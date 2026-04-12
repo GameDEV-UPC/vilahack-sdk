@@ -13,7 +13,9 @@ export async function fetchClient<T = void>(
   try {
     const { params, ...requestInit } = options;
 
-    const url = new URL(endpointPath, config.baseUrl);
+    const base = config.baseUrl.replace(/\/+$/, "");
+    const path = endpointPath.replace(/^\/+/, "");
+    const url = new URL(`${base}/${path}`);
 
     if (params) {
       Object.entries(params).forEach(([key, value]) => {
