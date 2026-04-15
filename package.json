@@ -23,6 +23,11 @@
       "import": "./dist/user/index.js",
       "default": "./dist/user/index.js"
     },
+    "./user/application": {
+      "types": "./dist/user/application/index.d.ts",
+      "import": "./dist/user/application/index.js",
+      "default": "./dist/user/application/index.js"
+    },
     "./puzzle": {
       "types": "./dist/puzzle/index.d.ts",
       "import": "./dist/puzzle/index.js",
