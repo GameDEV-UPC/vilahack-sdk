@@ -41,6 +41,13 @@ export interface QRRequest {
   b?: string;
 }
 
+export interface ApplicationIndex {
+  id: string;
+  name: string;
+  created_at: string;
+  status: string;
+}
+
 export type SignUpRequest = Omit<UserProfile, "created_at" | "check_in" | "status">;
 export type UpdateUserRequest = Partial<Omit<UserProfile, "created_at" | "check_in" | "status">>;
 
@@ -49,9 +56,12 @@ export type GetUserErrorCode = GlobalError | "USER_NOT_FOUND";
 export type UpdateUserErrorCode = GlobalError | "USER_UPDATE_ERROR";
 export type CheckInUserErrorCode = GlobalError | "USER_ALREADY_CHECKED_IN";
 export type GetQRErrorCode = GlobalError;
+export type GetApplicationIndexErrorCode = GlobalError;
 
 export type SignUpResponse = ServiceResponse<void, SignUpErrorCode>;
 export type GetUserResponse = ServiceResponse<UserProfile, GetUserErrorCode>;
 export type UpdateUserResponse = ServiceResponse<void, UpdateUserErrorCode>;
 export type CheckInUserResponse = ServiceResponse<void, CheckInUserErrorCode>;
 export type GetQRResponse = ServiceResponse<string, GetQRErrorCode>;
+
+export type GetApplicationIndexResponse = ServiceResponse<ApplicationIndex[], GetApplicationIndexErrorCode>;

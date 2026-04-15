@@ -1,5 +1,6 @@
 export const API_ROUTES = {
   USER: {
+    INDEX: "/user/application/index",
     GET: "/user/application",
     SIGNUP: "/user/application",
     UPDATE: "/user/application/update",

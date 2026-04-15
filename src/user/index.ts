@@ -5,6 +5,7 @@ import { checkInUser } from "./checkInUser.js";
 import { getQR } from "./getQr.js";
 import { getUser } from "./getUser.js";
 import { signUp } from "./signUp.js";
+import { getApplicationsIndex } from "./getApplicationsIndex.js";
 import type {
   UserRequest,
   GetUserResponse,
@@ -15,6 +16,7 @@ import type {
   GetQRResponse,
   UpdateUserResponse,
   UpdateUserRequest,
+  GetApplicationIndexResponse,
 } from "./types.js";
 import { updateUser } from "./updateUser.js";
 
@@ -39,5 +41,9 @@ export class UserModule {
 
   public async getQR(data?: QRRequest): Promise<GetQRResponse> {
     return getQR(this.config, data);
+  }
+
+  public async getApplicationsIndex(): Promise<GetApplicationIndexResponse> {
+    return getApplicationsIndex(this.config);
   }
 }
