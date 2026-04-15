@@ -13,7 +13,7 @@ const GET_USER_ERRORS: Record<number, GetUserErrorCode> = {
 export async function getUser(config: Config, data: UserRequest = {}): Promise<GetUserResponse> {
   const result = await fetchClient<UserProfile>(config, API_ROUTES.USER.GET, {
     method: "GET",
-    params: data as Record<string, string | number | undefined>,
+    params: data,
   });
 
   if (!result.success) {

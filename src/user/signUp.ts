@@ -13,7 +13,7 @@ const SIGNUP_ERRORS: Record<number, SignUpErrorCode> = {
 export async function signUp(config: Config, data: SignUpRequest): Promise<SignUpResponse> {
   const result = await fetchClient<void>(config, API_ROUTES.USER.SIGNUP, {
     method: "PUT",
-    body: JSON.stringify(data),
+    body: data,
   });
 
   if (!result.success) {

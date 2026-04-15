@@ -2,9 +2,10 @@ export * from "./types.js";
 
 import type { Config } from "../config.js";
 import { checkInUser } from "./checkInUser.js";
-import { getQR } from "./getQr.js";
+import { getQR } from "./getQR.js";
 import { getUser } from "./getUser.js";
 import { signUp } from "./signUp.js";
+import { updateUser } from "./updateUser.js";
 import type {
   UserRequest,
   GetUserResponse,
@@ -15,8 +16,8 @@ import type {
   GetQRResponse,
   UpdateUserResponse,
   UpdateUserRequest,
+  CheckInUserRequest,
 } from "./types.js";
-import { updateUser } from "./updateUser.js";
 
 export class UserModule {
   constructor(private config: Config) {}
@@ -33,7 +34,7 @@ export class UserModule {
     return signUp(this.config, data);
   }
 
-  public async checkIn(data: UserRequest): Promise<CheckInUserResponse> {
+  public async checkIn(data: CheckInUserRequest): Promise<CheckInUserResponse> {
     return checkInUser(this.config, data);
   }
 

@@ -36,6 +36,9 @@ export interface UserRequest {
   id?: string;
   qr?: string;
 }
+
+export type CheckInUserRequest = { id: string; qr?: string } | { id?: string; qr: string };
+
 export interface QRRequest {
   m?: string;
   b?: string;

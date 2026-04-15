@@ -16,7 +16,7 @@ export async function updateUser(
 ): Promise<UpdateUserResponse> {
   const result = await fetchClient<void>(config, API_ROUTES.USER.UPDATE, {
     method: "PUT",
-    body: JSON.stringify(data),
+    body: data,
   });
 
   if (!result.success) {

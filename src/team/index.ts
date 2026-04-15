@@ -10,7 +10,9 @@ import type {
   GetTeamResponse,
   JoinTeamResponse,
   LeaveTeamResponse,
+  UpdateTeamResponse,
 } from "./types.js";
+import { updateTeam } from "./updateTeam.js";
 
 export class TeamModule {
   constructor(private config: Config) {}
@@ -29,5 +31,9 @@ export class TeamModule {
 
   public async join(teamId: string): Promise<JoinTeamResponse> {
     return joinTeam(this.config, teamId);
+  }
+
+  public async update(newName: string): Promise<UpdateTeamResponse> {
+    return updateTeam(this.config, newName);
   }
 }

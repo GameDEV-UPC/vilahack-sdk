@@ -12,4 +12,3 @@ To use the examples you need to have acces to Vilahack and Supabases API's. Then
 If you wanna try the examples install the dev dependencies with npm install and then run the scripts with tsx.
 
 - fetch-setup.ts: Simple example to set up auths and endpoints to able to fetch from the Vilahack API.
-
