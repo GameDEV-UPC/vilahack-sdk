@@ -9,7 +9,7 @@ import type {
   SubmitApplicationResponse,
 } from "./types.js";
 
-const SIGNUP_ERRORS: Record<number, SubmitApplicationErrorCode> = {
+const SUBMIT_APPLICATION_ERRORS: Record<number, SubmitApplicationErrorCode> = {
   ...COMMON_ERRORS,
   412: "EMAIL_ALREADY_IN_USE",
 };
@@ -24,7 +24,7 @@ export async function submitUserApplication(
   });
 
   if (!result.success) {
-    return mapServiceError<SubmitApplicationErrorCode>(result, SIGNUP_ERRORS);
+    return mapServiceError<SubmitApplicationErrorCode>(result, SUBMIT_APPLICATION_ERRORS);
   }
 
   return { success: true, data: undefined };

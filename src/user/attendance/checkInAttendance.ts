@@ -9,7 +9,7 @@ import type {
   CheckInAttendanceResponse,
 } from "./types.js";
 
-const GET_USER_ERRORS: Record<number, CheckInAttendanceErrorCode> = {
+const CHECK_IN_ATTENDANCE_ERRORS: Record<number, CheckInAttendanceErrorCode> = {
   ...COMMON_ERRORS,
   412: "USER_ALREADY_CHECKED_IN",
 };
@@ -24,7 +24,7 @@ export async function checkInAttendance(
   });
 
   if (!result.success) {
-    return mapServiceError<CheckInAttendanceErrorCode>(result, GET_USER_ERRORS);
+    return mapServiceError<CheckInAttendanceErrorCode>(result, CHECK_IN_ATTENDANCE_ERRORS);
   }
 
   return { success: true, data: result.data };

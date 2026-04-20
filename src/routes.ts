@@ -9,7 +9,7 @@ export const API_ROUTES = {
       CHECKIN: "/user/attendance/check_in",
       ACCEPT: "/user/attendance/accept",
       CONFIRM: "/user/attendance/confirm",
-      CANCEL: "user/attendance/cancel",
+      CANCEL: "/user/attendance/cancel",
     },
     QR: "/user/qr.svg",
   },

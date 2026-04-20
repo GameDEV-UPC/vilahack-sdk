@@ -9,7 +9,7 @@ import type {
   UpdateApplicationResponse,
 } from "./types.js";
 
-const UPDATE_USER_ERRORS: Record<number, UpdateApplicationErrorCode> = {
+const UPDATE_APPLICATION_ERRORS: Record<number, UpdateApplicationErrorCode> = {
   ...COMMON_ERRORS,
   412: "UPDATE_APPLICATION_ERROR",
 };
@@ -24,7 +24,7 @@ export async function updateUserApplication(
   });
 
   if (!result.success) {
-    return mapServiceError<UpdateApplicationErrorCode>(result, UPDATE_USER_ERRORS);
+    return mapServiceError<UpdateApplicationErrorCode>(result, UPDATE_APPLICATION_ERRORS);
   }
 
   return { success: true, data: undefined };

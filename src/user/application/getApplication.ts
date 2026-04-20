@@ -10,7 +10,7 @@ import type {
   ApplicationParams,
 } from "./types.js";
 
-const GET_USER_ERRORS: Record<number, GetApplicationErrorCode> = {
+const GET_APPLICATION_ERRORS: Record<number, GetApplicationErrorCode> = {
   ...COMMON_ERRORS,
   404: "APPLICATION_NOT_FOUND",
 };
@@ -25,7 +25,7 @@ export async function getUserApplication(
   });
 
   if (!result.success) {
-    return mapServiceError<GetApplicationErrorCode>(result, GET_USER_ERRORS);
+    return mapServiceError<GetApplicationErrorCode>(result, GET_APPLICATION_ERRORS);
   }
 
   return { success: true, data: result.data };
