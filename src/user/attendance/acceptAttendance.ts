@@ -9,7 +9,7 @@ import type {
   AcceptAttendanceErrorCode,
 } from "./types.js";
 
-const GET_USER_ERRORS: Record<number, AcceptAttendanceErrorCode> = {
+const ACCEPT_ATTENDANCE_ERRORS: Record<number, AcceptAttendanceErrorCode> = {
   ...COMMON_ERRORS,
   412: "USER_NOT_APPLIED",
 };
@@ -24,7 +24,7 @@ export async function acceptAttendance(
   });
 
   if (!result.success) {
-    return mapServiceError<AcceptAttendanceErrorCode>(result, GET_USER_ERRORS);
+    return mapServiceError<AcceptAttendanceErrorCode>(result, ACCEPT_ATTENDANCE_ERRORS);
   }
 
   return { success: true, data: result.data };

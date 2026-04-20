@@ -9,7 +9,7 @@ Built with zero external dependencies, this SDK provides a seamless developer ex
 Install the package via npm, yarn, or pnpm:
 
 ```bash
-npm install @gamedev.upc/vilahack-sdk
+npm install @gamedev.upc/vilahack-sdk@latest
 ```
 
 ## Usage
@@ -42,7 +42,13 @@ Once configured, simply import your vilahack instance into any file to make stri
 import { vilahack } from "@lib/vilahack";
 
 // User Module
-const userResponse = await vilahack.user.get();
+const userResponse = await vilahack.user.getQR();
+
+// Application Submodule
+const applicationResponse = await vilahack.user.application().get();
+
+// Attendance Submodule
+const attResponse = await vilahack.user.attendance.confirm();
 
 // Team Module
 const teamResponse = await vilahack.team.get();
@@ -54,10 +60,10 @@ Because types are completely separate from your configured instance, you should 
 
 ```ts
 // User Types
-import type { GetUserError } from "@gamedev.upc/vilahack-sdk/user";
+import type { GetUserErrorCode } from "@gamedev.upc/vilahack-sdk/user";
 
 // Team Types
-import type { GetTeamError } from "@gamedev.upc/vilahack-sdk/team";
+import type { GetTeamErrorCode } from "@gamedev.upc/vilahack-sdk/team";
 ```
 
 ## References
@@ -68,10 +74,29 @@ import type { GetTeamError } from "@gamedev.upc/vilahack-sdk/team";
 | Method          | Parameters          | Description                                             |
 | :-------------- | :------------------ | :------------------------------------------------------ |
 | `get(data?)`    | `UserRequest`       | Fetches current user, or a specific user by ID/QR.      |
-| `update(data)`  | `UpdateUserRequest` | Updates the authenticated user's application.           |
 | `getQR(data?)`  | `QRRequest`         | Returns a QR code SVG for check-in.                     |
-| `checkIn(data)` | `UserRequest`       | **(Admin)** Marks a participant as checked-in by ID/QR. |
-| `signUp(data)`  | `SignUpRequest`     | Registers a new user application                        |
+
+<details>
+<summary><b> Application Submodule Reference</b></summary>
+
+| Method          | Parameters          | Description                                             |
+| :-------------- | :------------------ | :------------------------------------------------------ |
+| `get()`         | `ApplicationParams`              | Fetches the current user's application details.         |
+| `update(data)`  | `UpdateApplicationRequest` | Updates the current user's application details.         |
+| `submit(data)`  | `SubmitApplicationRequest` | Submits the current user's application for review.      |
+
+</details>
+
+<details>
+<summary><b> Attendance Submodule Reference</b></summary>
+
+| Method          | Parameters          | Description                                             |
+| :-------------- | :------------------ | :------------------------------------------------------ |
+| `accept(params)`| `AttendanceParams`      | Accepts the specified user's attendance request.          |
+| `checkIn(params)`| `AttendanceParams`      | Checks in the specified user for the current event.    |
+| `confirm()`     | `none`              | Confirms attendance for the current user.               |
+| `cancel()`      | `none`              | Cancels attendance for the current user.                |
+| `cancel()`      | `none`              | Cancels the current user's attendance request.           |
 
 </details>
 
@@ -85,6 +110,7 @@ import type { GetTeamError } from "@gamedev.upc/vilahack-sdk/team";
 | `join(id)`     | `id: string`   | Joins an existing team using the team's unique uuid. |
 | `leave()`      | `none`         | Removes the current user from their team.            |
 
+</details>
 </details>
 
 <details>

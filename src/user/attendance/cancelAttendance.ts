@@ -5,7 +5,7 @@ import { mapServiceError } from "../../utils/errorHandler.js";
 import { fetchClient } from "../../utils/fetchClient.js";
 import type { CancelAttendanceErrorCode, CancelAttendanceResponse } from "./types.js";
 
-const GET_USER_ERRORS: Record<number, CancelAttendanceErrorCode> = {
+const CANCEL_ATTENDANCE_ERRORS: Record<number, CancelAttendanceErrorCode> = {
   ...COMMON_ERRORS,
   412: "USET_NOT_CONFIRMED",
 };
@@ -16,7 +16,7 @@ export async function cancelAttendance(config: Config): Promise<CancelAttendance
   });
 
   if (!result.success) {
-    return mapServiceError<CancelAttendanceErrorCode>(result, GET_USER_ERRORS);
+    return mapServiceError<CancelAttendanceErrorCode>(result, CANCEL_ATTENDANCE_ERRORS);
   }
 
   return { success: true, data: result.data };
