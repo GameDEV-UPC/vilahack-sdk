@@ -18,7 +18,7 @@ export async function submitUserApplication(
   config: Config,
   data: SubmitApplicationRequest,
 ): Promise<SubmitApplicationResponse> {
-  const result = await fetchClient<void>(config, API_ROUTES.USER.SIGNUP, {
+  const result = await fetchClient<void>(config, API_ROUTES.USER.APPLICATION.SUBMIT, {
     method: "PUT",
     body: data,
   });

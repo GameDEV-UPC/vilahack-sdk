@@ -34,7 +34,6 @@ export interface Application {
 
 export interface ApplicationParams {
   id?: string;
-  qr?: string;
 }
 
 export type SubmitApplicationRequest = Omit<Application, "created_at" | "check_in" | "status">;

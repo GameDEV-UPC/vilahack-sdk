@@ -1,20 +1,27 @@
 export const API_ROUTES = {
   USER: {
-    GET: "/user/application",
-    SIGNUP: "/user/application",
-    UPDATE: "/user/application/update",
-    CHECKIN: "/user/check_in",
+    APPLICATION: {
+      GET: "/user/application",
+      SUBMIT: "/user/application",
+      UPDATE: "/user/application/update",
+    },
+    ATTENDANCE: {
+      CHECKIN: "/user/attendance/check_in",
+      ACCEPT: "/user/attendance/accept",
+      CONFIRM: "/user/attendance/confirm",
+      CANCEL: "user/attendance/cancel",
+    },
     QR: "/user/qr.svg",
   },
   TEAM: {
     GET: "/team",
     LEAVE: "/team/leave",
-    JOIN: (teamId: string) => `/team/join/${teamId}`,
-    CREATE: (teamName: string) => `/team/${teamName}`,
-    UPDATE: (newName: string) => `/team/update/${newName}`,
+    JOIN: "/team/join",
+    CREATE: "/team/create",
+    UPDATE: "/team/update",
   },
   PUZZLE: {
-    GET: (puzzleId: string) => `/puzzle/${puzzleId}`,
+    GET: "/puzzle",
     GET_ALL: "/puzzle/all",
     GET_ALL_BY_CATEGORY: "/puzzle/all/by_category",
   },

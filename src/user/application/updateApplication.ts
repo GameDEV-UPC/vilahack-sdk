@@ -18,7 +18,7 @@ export async function updateUserApplication(
   config: Config,
   data: UpdateApplicationRequest,
 ): Promise<UpdateApplicationResponse> {
-  const result = await fetchClient<void>(config, API_ROUTES.USER.UPDATE, {
+  const result = await fetchClient<void>(config, API_ROUTES.USER.APPLICATION.UPDATE, {
     method: "PUT",
     body: data,
   });

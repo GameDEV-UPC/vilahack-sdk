@@ -3,17 +3,17 @@ import { COMMON_ERRORS } from "../constants/api.js";
 import { API_ROUTES } from "../routes.js";
 import { mapServiceError } from "../utils/errorHandler.js";
 import { fetchClient } from "../utils/fetchClient.js";
-import type { UpdateTeamErrorCode, UpdateTeamResponse } from "./types.js";
+import type { UpdateTeamErrorCode, TeamParams, UpdateTeamResponse } from "./types.js";
 
 const UPDATE_TEAM_ERRORS: Record<number, UpdateTeamErrorCode> = {
   ...COMMON_ERRORS,
   412: "TEAM_ALREADY_EXISTS",
 };
 
-export async function updateTeam(config: Config, newName: string): Promise<UpdateTeamResponse> {
-  const safeName = encodeURIComponent(newName);
-  const result = await fetchClient<void>(config, API_ROUTES.TEAM.UPDATE(safeName), {
+export async function updateTeam(config: Config, params: TeamParams): Promise<UpdateTeamResponse> {
+  const result = await fetchClient<void>(config, API_ROUTES.TEAM.UPDATE, {
     method: "PUT",
+    params: params,
   });
 
   if (!result.success) {

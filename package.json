@@ -28,6 +28,11 @@
       "import": "./dist/user/application/index.js",
       "default": "./dist/user/application/index.js"
     },
+    "./user/attendance": {
+      "types": "./dist/user/attendance/index.d.ts",
+      "import": "./dist/user/attendance/index.js",
+      "default": "./dist/user/attendance/index.js"
+    },
     "./puzzle": {
       "types": "./dist/puzzle/index.d.ts",
       "import": "./dist/puzzle/index.js",

@@ -1,8 +1,7 @@
 import type { Config } from "../config.js";
 import { API_ROUTES } from "../routes.js";
 import { fetchClient } from "../utils/fetchClient.js";
-import type { JoinTeamErrorCode, JoinTeamResponse, TeamResponse } from "./types.js";
-
+import type { JoinTeamErrorCode, JoinTeamParams, JoinTeamResponse, TeamResponse } from "./types.js";
 import { mapServiceError } from "../utils/errorHandler.js";
 import { COMMON_ERRORS } from "../constants/api.js";
 
@@ -11,10 +10,10 @@ const JOIN_TEAM_ERRORS: Record<number, JoinTeamErrorCode> = {
   404: "TEAM_FULL",
 };
 
-export async function joinTeam(config: Config, data: string): Promise<JoinTeamResponse> {
-  const safeId = encodeURIComponent(data);
-  const result = await fetchClient<TeamResponse>(config, API_ROUTES.TEAM.JOIN(safeId), {
+export async function joinTeam(config: Config, params: JoinTeamParams): Promise<JoinTeamResponse> {
+  const result = await fetchClient<TeamResponse>(config, API_ROUTES.TEAM.JOIN, {
     method: "PUT",
+    params: params,
   });
 
   if (!result.success) {

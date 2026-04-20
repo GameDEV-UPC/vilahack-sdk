@@ -16,8 +16,8 @@ import { updateUserApplication } from "./updateApplication.js";
 export class ApplicationModule {
   constructor(private config: Config) {}
 
-  public async get(data?: ApplicationParams): Promise<GetApplicationResponse> {
-    return getUserApplication(this.config, data);
+  public async get(params?: ApplicationParams): Promise<GetApplicationResponse> {
+    return getUserApplication(this.config, params);
   }
 
   public async update(data: UpdateApplicationRequest): Promise<UpdateApplicationResponse> {

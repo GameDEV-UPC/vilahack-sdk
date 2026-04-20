@@ -19,7 +19,7 @@ export async function getUserApplication(
   config: Config,
   data: ApplicationParams = {},
 ): Promise<GetApplicationResponse> {
-  const result = await fetchClient<Application>(config, API_ROUTES.USER.GET, {
+  const result = await fetchClient<Application>(config, API_ROUTES.USER.APPLICATION.GET, {
     method: "GET",
     params: data,
   });

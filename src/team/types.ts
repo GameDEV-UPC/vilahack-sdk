@@ -6,6 +6,13 @@ export interface TeamResponse {
   members: string[];
 }
 
+export interface TeamParams {
+  name: string;
+}
+export interface JoinTeamParams {
+  id: string;
+}
+
 export type CreateTeamErrorCode = GlobalError | "TEAM_ALREADY_EXISTS";
 export type GetTeamErrorCode = GlobalError | "TEAM_NOT_FOUND";
 export type JoinTeamErrorCode = GlobalError | "TEAM_NOT_FOUND" | "ALREADY_IN_TEAM" | "TEAM_FULL";
