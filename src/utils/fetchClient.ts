@@ -1,8 +1,10 @@
 import type { Config } from "../config.js";
 import type { ApiResponse, ApiErrorResponse } from "../types.js";
 
-interface FetchOptions extends RequestInit {
-  params?: Record<string, string | number | undefined>;
+interface FetchOptions extends Omit<RequestInit, "body"> {
+  params?: Record<string, any>;
+  body?: unknown;
+  responseType?: "json" | "text" | "blob";
 }
 
 export async function fetchClient<T = void>(
@@ -11,7 +13,7 @@ export async function fetchClient<T = void>(
   options: FetchOptions = {},
 ): Promise<ApiResponse<T>> {
   try {
-    const { params, ...requestInit } = options;
+    const { params, body, ...requestInit } = options;
 
     const base = config.baseUrl.replace(/\/+$/, "");
     const path = endpointPath.replace(/^\/+/, "");
@@ -19,49 +21,68 @@ export async function fetchClient<T = void>(
 
     if (params) {
       Object.entries(params).forEach(([key, value]) => {
-        if (value !== undefined) url.searchParams.append(key, value.toString());
+        if (value !== undefined) url.searchParams.append(key, String(value));
       });
     }
 
-    const token = await config.getToken();
-
     const headers = new Headers(options.headers);
-
+    const token = await config.getToken();
     if (token) {
       headers.set("Authorization", `Bearer ${token}`);
     }
 
-    const isFormData = requestInit.body instanceof FormData;
-    if (!isFormData && !headers.has("Content-Type")) {
-      headers.set("Content-Type", "application/json");
+    let finalBody: BodyInit | undefined;
+
+    if (body) {
+      finalBody = JSON.stringify(body);
+      if (!headers.has("Content-Type")) {
+        headers.set("Content-Type", "application/json");
+      }
     }
 
     const response = await fetch(url.toString(), {
       ...requestInit,
       headers,
+      ...(finalBody !== undefined ? { body: finalBody } : {}),
     });
 
     const contentType = response.headers.get("Content-Type") || "";
-    const rawText = await response.text();
 
     if (!response.ok) {
+      const rawErrorText = await response.text();
       try {
-        const errorPayload = JSON.parse(rawText) as ApiErrorResponse;
+        const errorPayload = JSON.parse(rawErrorText) as ApiErrorResponse;
         return { success: false, status: response.status, error: errorPayload };
       } catch {
         return {
           success: false,
           status: response.status,
           error: {
-            message: rawText || `Server returned ${response.status}`,
+            message: rawErrorText || `Server returned ${response.status}`,
             type: "internal",
           },
         };
       }
     }
 
+    if (
+      options.responseType === "blob" ||
+      contentType.includes("application/octet-stream") ||
+      contentType.includes("application/gzip")
+    ) {
+      const data = (await response.blob()) as unknown as T;
+      return { success: true, status: response.status, data };
+    }
+
+    if (options.responseType === "text") {
+      const data = (await response.text()) as unknown as T;
+      return { success: true, status: response.status, data };
+    }
+
+    const rawText = await response.text();
     let data: T;
-    if (contentType.includes("application/json")) {
+
+    if (options.responseType === "json" || contentType.includes("application/json")) {
       data = rawText ? (JSON.parse(rawText) as T) : ({} as T);
     } else {
       data = rawText as unknown as T;

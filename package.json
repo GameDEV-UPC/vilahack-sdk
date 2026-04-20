@@ -1,6 +1,8 @@
 {
   "name": "@gamedev.upc/vilahack-sdk",
-  "version": "0.2.2",
+  "author": "Joel Esteller Planesas",
+  "organization": "GameDEV-UPC",
+  "version": "0.3.0",
   "description": "The official TypeScript SDK for Vilahack",
   "type": "module",
   "main": "dist/index.js",
@@ -20,6 +22,21 @@
       "types": "./dist/user/index.d.ts",
       "import": "./dist/user/index.js",
       "default": "./dist/user/index.js"
+    },
+    "./user/application": {
+      "types": "./dist/user/application/index.d.ts",
+      "import": "./dist/user/application/index.js",
+      "default": "./dist/user/application/index.js"
+    },
+    "./user/attendance": {
+      "types": "./dist/user/attendance/index.d.ts",
+      "import": "./dist/user/attendance/index.js",
+      "default": "./dist/user/attendance/index.js"
+    },
+    "./puzzle": {
+      "types": "./dist/puzzle/index.d.ts",
+      "import": "./dist/puzzle/index.js",
+      "default": "./dist/puzzle/index.js"
     }
   },
   "scripts": {
@@ -29,7 +46,6 @@
   "files": [
     "dist"
   ],
-  "author": "Joel Esteller Planesas",
   "license": "MIT",
   "homepage": "https://github.com/GameDEV-UPC/vilahack-sdk",
   "devDependencies": {
@@ -39,7 +55,6 @@
     "dotenv": "^17.4.1",
     "inquirer": "^13.4.1",
     "prettier": "^3.8.2",
-    "typescript": "^6.0.2",
-    "@gamedev.upc/vilahack-sdk": "^0.2.1"
+    "typescript": "^6.0.2"
   }
 }

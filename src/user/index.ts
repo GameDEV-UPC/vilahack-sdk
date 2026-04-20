@@ -1,43 +1,21 @@
 export * from "./types.js";
 
 import type { Config } from "../config.js";
-import { checkInUser } from "./checkInUser.js";
-import { getQR } from "./getQr.js";
-import { getUser } from "./getUser.js";
-import { signUp } from "./signUp.js";
-import type {
-  UserRequest,
-  GetUserResponse,
-  SignUpRequest,
-  SignUpResponse,
-  CheckInUserResponse,
-  QRRequest,
-  GetQRResponse,
-  UpdateUserResponse,
-  UpdateUserRequest,
-} from "./types.js";
-import { updateUser } from "./updateUser.js";
+import { ApplicationModule } from "./application/index.js";
+import { AttendanceModule } from "./attendance/index.js";
+import { getUserQR } from "./getUserQR.js";
+import type { UserQRParams, GetUserQRResponse } from "./types.js";
 
 export class UserModule {
-  constructor(private config: Config) {}
+  public application: ApplicationModule;
+  public attendance: AttendanceModule;
 
-  public async get(data?: UserRequest): Promise<GetUserResponse> {
-    return getUser(this.config, data);
+  constructor(private config: Config) {
+    this.application = new ApplicationModule(this.config);
+    this.attendance = new AttendanceModule(this.config);
   }
 
-  public async update(data: UpdateUserRequest): Promise<UpdateUserResponse> {
-    return updateUser(this.config, data);
-  }
-
-  public async signUp(data: SignUpRequest): Promise<SignUpResponse> {
-    return signUp(this.config, data);
-  }
-
-  public async checkIn(data: UserRequest): Promise<CheckInUserResponse> {
-    return checkInUser(this.config, data);
-  }
-
-  public async getQR(data?: QRRequest): Promise<GetQRResponse> {
-    return getQR(this.config, data);
+  public async getQR(data?: UserQRParams): Promise<GetUserQRResponse> {
+    return getUserQR(this.config, data);
   }
 }

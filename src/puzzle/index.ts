@@ -6,13 +6,14 @@ import type {
   GetPuzzleResponse,
   GetPuzzleAllResponse,
   GetPuzzleAllByCategoryResponse,
+  GetPuzzleParams,
 } from "./types.js";
 
 export class PuzzleModule {
   constructor(private config: Config) {}
 
-  public async get(id: string): Promise<GetPuzzleResponse> {
-    return getPuzzle(this.config, id);
+  public async get(params: GetPuzzleParams): Promise<GetPuzzleResponse> {
+    return getPuzzle(this.config, params);
   }
 
   public async getAll(): Promise<GetPuzzleAllResponse> {
