@@ -1,22 +1,26 @@
 import { API_ROUTES } from "../routes.js";
 import type { Config } from "../config.js";
 import { fetchClient } from "../utils/fetchClient.js";
-import type { GetQRResponse, GetQRErrorCode, QRRequest } from "./types.js";
 import { COMMON_ERRORS } from "../constants/api.js";
 import { mapServiceError } from "../utils/errorHandler.js";
+import type { GetUserQRResponse, GetUserQRErrorCode, UserQRParams } from "./types.js";
 
-const GET_QR_ERRORS: Record<number, GetQRErrorCode> = {
+const GET_QR_ERRORS: Record<number, GetUserQRErrorCode> = {
   ...COMMON_ERRORS,
 };
 
-export async function getQR(config: Config, data: QRRequest = {}): Promise<GetQRResponse> {
+export async function getUserQR(
+  config: Config,
+  params: UserQRParams = {},
+): Promise<GetUserQRResponse> {
   const result = await fetchClient<string>(config, API_ROUTES.USER.QR, {
     method: "GET",
-    params: data as Record<string, string | number | undefined>,
+    params: params,
+    responseType: "text",
   });
 
   if (!result.success) {
-    return mapServiceError<GetQRErrorCode>(result, GET_QR_ERRORS);
+    return mapServiceError<GetUserQRErrorCode>(result, GET_QR_ERRORS);
   }
 
   return { success: true, data: result.data };

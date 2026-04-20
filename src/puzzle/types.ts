@@ -26,6 +26,10 @@ export interface Puzzle {
 
 export type PuzzleByCategoryMap = Record<Category, Puzzle[]>;
 
+export interface GetPuzzleParams {
+  id: string;
+}
+
 export type GetPuzzleErrorCode = GlobalError | "PUZZLE_NOT_FOUND";
 export type GetPuzzleAllErrorCode = GlobalError;
 export type GetPuzzleAllByCategoryErrorCode = GlobalError;
