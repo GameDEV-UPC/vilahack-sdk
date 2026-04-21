@@ -4,7 +4,14 @@ export type Gender = "man" | "woman" | "nonbinary" | "agender" | "other" | "unsp
 export type TShirtSize = "xs" | "s" | "m" | "l" | "xl" | "xxl";
 export type Discovery = "social_media" | "website" | "acquaintances" | "posters" | "other";
 export type Experience = "expert" | "experienced" | "inexperienced" | "aware" | "newbie";
-export type ApplicationStatus = "applied" | "accepted" | "disqualified" | "finisher" | "winner";
+export type ApplicationStatus =
+  | "applied"
+  | "accepted"
+  | "confirmed"
+  | "participating"
+  | "disqualified"
+  | "finisher"
+  | "winner";
 
 export interface Application {
   name: string;
