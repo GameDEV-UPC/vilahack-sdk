@@ -2,7 +2,7 @@
   "name": "@gamedev.upc/vilahack-sdk",
   "author": "Joel Esteller Planesas",
   "organization": "GameDEV-UPC",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "The official TypeScript SDK for Vilahack",
   "type": "module",
   "main": "dist/index.js",
