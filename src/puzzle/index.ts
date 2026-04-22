@@ -1,3 +1,5 @@
+export * from "./types.js";
+
 import type { Config } from "../config.js";
 import { getPuzzle } from "./getPuzzle.js";
 import { getPuzzleAll } from "./getPuzzleAll.js";
