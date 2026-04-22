@@ -4,6 +4,9 @@ export const API_ROUTES = {
       GET: "/user/application",
       SUBMIT: "/user/application",
       UPDATE: "/user/application/update",
+      LIST: {
+        SUMMARIES: "/user/application/index",
+      },
     },
     ATTENDANCE: {
       CHECKIN: "/user/attendance/check_in",
