@@ -40,6 +40,13 @@ export interface Application {
   status: ApplicationStatus;
 }
 
+export interface ApplicationSummary {
+  id: string;
+  name: string;
+  created_at: string;
+  status: ApplicationStatus;
+}
+
 export interface ApplicationParams {
   id?: string;
 }
@@ -55,3 +62,4 @@ export type UpdateApplicationErrorCode = GlobalError | "UPDATE_APPLICATION_ERROR
 export type SubmitApplicationResponse = ServiceResponse<void, SubmitApplicationErrorCode>;
 export type GetApplicationResponse = ServiceResponse<Application, GetApplicationErrorCode>;
 export type UpdateApplicationResponse = ServiceResponse<void, UpdateApplicationErrorCode>;
+export type ListApplicationSummariesResponse = ServiceResponse<ApplicationSummary[]>;
