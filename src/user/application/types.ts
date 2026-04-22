@@ -8,6 +8,7 @@ export type ApplicationStatus =
   | "applied"
   | "accepted"
   | "confirmed"
+  | "cancelled"
   | "participating"
   | "disqualified"
   | "finisher"

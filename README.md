@@ -99,6 +99,7 @@ import type { GetTeamErrorCode } from "@gamedev.upc/vilahack-sdk/team";
 | `cancel()`      | `none`              | Cancels the current user's attendance request.           |
 
 </details>
+</details>
 
 <details>
 <summary><b>Team Module Reference</b></summary>
@@ -110,7 +111,6 @@ import type { GetTeamErrorCode } from "@gamedev.upc/vilahack-sdk/team";
 | `join(id)`     | `id: string`   | Joins an existing team using the team's unique uuid. |
 | `leave()`      | `none`         | Removes the current user from their team.            |
 
-</details>
 </details>
 
 <details>
