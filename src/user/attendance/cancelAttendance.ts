@@ -11,7 +11,7 @@ const CANCEL_ATTENDANCE_ERRORS: Record<number, CancelAttendanceErrorCode> = {
 };
 
 export async function cancelAttendance(config: Config): Promise<CancelAttendanceResponse> {
-  const result = await fetchClient<void>(config, API_ROUTES.USER.ATTENDANCE.CONFIRM, {
+  const result = await fetchClient<void>(config, API_ROUTES.USER.ATTENDANCE.CANCEL, {
     method: "PUT",
   });
 
