@@ -53,3 +53,8 @@ export interface ServiceError<TCode extends string> {
 export type ServiceResponse<TData, TCode extends string = never> =
   | { success: true; data: TData }
   | ServiceError<TCode>;
+
+export type Unwrap<T extends { success: boolean; data?: any }> = Extract<
+  T,
+  { success: true }
+>["data"];

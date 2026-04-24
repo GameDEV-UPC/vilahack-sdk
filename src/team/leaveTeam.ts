@@ -4,6 +4,7 @@ import { fetchClient } from "../utils/fetchClient.js";
 import type { LeaveTeamErrorCode, LeaveTeamResponse } from "./types.js";
 import { mapServiceError } from "../utils/errorHandler.js";
 import { COMMON_ERRORS } from "../constants/api.js";
+import type { Unwrap } from "../types.js";
 
 const LEAVE_TEAM_ERRORS: Record<number, LeaveTeamErrorCode> = {
   ...COMMON_ERRORS,
@@ -11,7 +12,7 @@ const LEAVE_TEAM_ERRORS: Record<number, LeaveTeamErrorCode> = {
 };
 
 export async function leaveTeam(config: Config): Promise<LeaveTeamResponse> {
-  const result = await fetchClient<void>(config, API_ROUTES.TEAM.LEAVE, {
+  const result = await fetchClient<Unwrap<LeaveTeamResponse>>(config, API_ROUTES.TEAM.LEAVE, {
     method: "PUT",
   });
 

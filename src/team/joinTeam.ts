@@ -1,9 +1,10 @@
 import type { Config } from "../config.js";
 import { API_ROUTES } from "../routes.js";
 import { fetchClient } from "../utils/fetchClient.js";
-import type { JoinTeamErrorCode, JoinTeamParams, JoinTeamResponse, TeamResponse } from "./types.js";
+import type { JoinTeamErrorCode, JoinTeamParams, JoinTeamResponse } from "./types.js";
 import { mapServiceError } from "../utils/errorHandler.js";
 import { COMMON_ERRORS } from "../constants/api.js";
+import type { Unwrap } from "../types.js";
 
 const JOIN_TEAM_ERRORS: Record<number, JoinTeamErrorCode> = {
   ...COMMON_ERRORS,
@@ -11,7 +12,7 @@ const JOIN_TEAM_ERRORS: Record<number, JoinTeamErrorCode> = {
 };
 
 export async function joinTeam(config: Config, params: JoinTeamParams): Promise<JoinTeamResponse> {
-  const result = await fetchClient<TeamResponse>(config, API_ROUTES.TEAM.JOIN, {
+  const result = await fetchClient<Unwrap<JoinTeamResponse>>(config, API_ROUTES.TEAM.JOIN, {
     method: "PUT",
     params: params,
   });
