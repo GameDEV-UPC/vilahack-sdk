@@ -22,6 +22,7 @@ export const API_ROUTES = {
     JOIN: "/team/join",
     CREATE: "/team/create",
     UPDATE: "/team/update",
+    LEADERBOARD: "/team/leaderboard",
   },
   PUZZLE: {
     GET: "/puzzle",
