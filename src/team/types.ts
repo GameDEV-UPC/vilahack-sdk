@@ -1,6 +1,6 @@
 import type { GlobalError, ServiceResponse } from "../types.js";
 
-export interface TeamResponse {
+export interface Team {
   name: string;
   id: string;
   members: string[];
@@ -20,7 +20,7 @@ export type LeaveTeamErrorCode = GlobalError | "NOT_ON_TEAM";
 export type UpdateTeamErrorCode = GlobalError | "TEAM_ALREADY_EXISTS";
 
 export type CreateTeamResponse = ServiceResponse<string, CreateTeamErrorCode>;
-export type GetTeamResponse = ServiceResponse<TeamResponse, GetTeamErrorCode>;
-export type JoinTeamResponse = ServiceResponse<TeamResponse, JoinTeamErrorCode>;
+export type GetTeamResponse = ServiceResponse<Team, GetTeamErrorCode>;
+export type JoinTeamResponse = ServiceResponse<Team, JoinTeamErrorCode>;
 export type LeaveTeamResponse = ServiceResponse<void, LeaveTeamErrorCode>;
 export type UpdateTeamResponse = ServiceResponse<void, UpdateTeamErrorCode>;
