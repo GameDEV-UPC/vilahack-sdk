@@ -85,9 +85,9 @@ if (puzzles.success) {
 }
 
 // import User Types to use user interface
-import type { GetUserResponse } from "@gamedev.upc/vilahack-sdk/user";
+import type { GetApplicationResponse } from "@gamedev.upc/vilahack-sdk/user/application";
 
-const user: GetUserResponse = await vilahack.user.get();
+const user: GetApplicationResponse = await vilahack.user.application.get();
 if (user.success) {
   console.log(user.data);
 } else {
