@@ -84,6 +84,7 @@ import type { GetTeamErrorCode } from "@gamedev.upc/vilahack-sdk/team";
 | `get()`         | `ApplicationParams`              | Fetches the current user's application details.         |
 | `update(data)`  | `UpdateApplicationRequest` | Updates the current user's application details.         |
 | `submit(data)`  | `SubmitApplicationRequest` | Submits the current user's application for review.      |
+| `listSummaries()` | `none` | Lists all user's application summaries.         |
 
 </details>
 
@@ -107,7 +108,8 @@ import type { GetTeamErrorCode } from "@gamedev.upc/vilahack-sdk/team";
 | Method         | Parameters     | Description                                          |
 | :------------- | :------------- | :--------------------------------------------------- |
 | `get()`        | `none`         | Fetches the team details for the current user.       |
-| `create(name)` | `name: string` | Creates a new team with the provided name.           |
+| `create(params)` | `TeamParams` | Creates a new team with the provided name.           |
+| `update(params)` | `TeamParams` | Updates the current team's name.                  |
 | `join(id)`     | `id: string`   | Joins an existing team using the team's unique uuid. |
 | `leave()`      | `none`         | Removes the current user from their team.            |
 
@@ -121,5 +123,14 @@ import type { GetTeamErrorCode } from "@gamedev.upc/vilahack-sdk/team";
 | `get(id)`            | `id: string` | Fetches details for a specific puzzle by its ID.            |
 | `getAll()`           | `none`       | Retrieves a list of all available puzzles.                  |
 | `getAllByCategory()` | `none`       | Retrieves all puzzles grouped by their specific categories. |
+
+</details>
+
+<details>
+<summary><b>Leaderboard Module Reference</b></summary>
+
+| Method               | Parameters   | Description                                                 |
+| :------------------- | :----------- | :---------------------------------------------------------- |
+| `get()`              | `none`       | Fetches the current event's leaderboard.                    |
 
 </details>
