@@ -30,15 +30,20 @@ export interface GetPuzzleParams {
   id: string;
 }
 
+export interface SolvePuzzleParams {
+  id: string;
+  flag: string;
+}
+
 export type GetPuzzleErrorCode = GlobalError | "PUZZLE_NOT_FOUND";
 export type GetPuzzleAllErrorCode = GlobalError;
 export type GetPuzzleAllByCategoryErrorCode = GlobalError;
+export type SolvePuzzleErrorCode = GlobalError;
 
 export type GetPuzzleResponse = ServiceResponse<Puzzle, GetPuzzleErrorCode>;
-
 export type GetPuzzleAllResponse = ServiceResponse<Puzzle[], GetPuzzleAllErrorCode>;
-
 export type GetPuzzleAllByCategoryResponse = ServiceResponse<
   PuzzleByCategoryMap,
   GetPuzzleAllByCategoryErrorCode
 >;
+export type SolvePuzzleResponse = ServiceResponse<boolean, GlobalError>;

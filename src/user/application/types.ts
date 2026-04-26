@@ -58,6 +58,7 @@ export type UpdateApplicationRequest = Partial<
 export type SubmitApplicationErrorCode = GlobalError | "EMAIL_ALREADY_IN_USE";
 export type GetApplicationErrorCode = GlobalError | "APPLICATION_NOT_FOUND";
 export type UpdateApplicationErrorCode = GlobalError | "UPDATE_APPLICATION_ERROR";
+export type ListApplicationSummariesErrorCode = GlobalError;
 
 export type SubmitApplicationResponse = ServiceResponse<void, SubmitApplicationErrorCode>;
 export type GetApplicationResponse = ServiceResponse<Application, GetApplicationErrorCode>;
