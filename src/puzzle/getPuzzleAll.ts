@@ -13,7 +13,7 @@ const GET_PUZZLE_ALL_ERRORS: Record<number, GetPuzzleAllErrorCode> = {
 export async function getPuzzleAll(config: Config): Promise<GetPuzzleAllResponse> {
   const result = await fetchClient<Unwrap<GetPuzzleAllResponse>>(
     config,
-    API_ROUTES.PUZZLE.GET_ALL,
+    API_ROUTES.PUZZLE.LIST.ALL,
     {
       method: "GET",
     },

@@ -37,6 +37,16 @@
       "types": "./dist/puzzle/index.d.ts",
       "import": "./dist/puzzle/index.js",
       "default": "./dist/puzzle/index.js"
+    },
+    "./leaderboard": {
+      "types": "./dist/leaderboard/index.d.ts",
+      "import": "./dist/leaderboard/index.js",
+      "default": "./dist/leaderboard/index.js"
+    },
+    "./activity": {
+      "types": "./dist/activity/index.d.ts",
+      "import": "./dist/activity/index.js",
+      "default": "./dist/activity/index.js"
     }
   },
   "scripts": {

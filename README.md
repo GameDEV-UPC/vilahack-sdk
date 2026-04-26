@@ -121,8 +121,8 @@ import type { GetTeamErrorCode } from "@gamedev.upc/vilahack-sdk/team";
 | Method               | Parameters   | Description                                                 |
 | :------------------- | :----------- | :---------------------------------------------------------- |
 | `get(id)`            | `id: string` | Fetches details for a specific puzzle by its ID.            |
-| `getAll()`           | `none`       | Retrieves a list of all available puzzles.                  |
-| `getAllByCategory()` | `none`       | Retrieves all puzzles grouped by their specific categories. |
+| `list()`           | `none`       | Retrieves a list of all available puzzles.                  |
+| `listByCategory()` | `none`       | Retrieves all puzzles grouped by their specific categories. |
 
 </details>
 
@@ -132,5 +132,15 @@ import type { GetTeamErrorCode } from "@gamedev.upc/vilahack-sdk/team";
 | Method               | Parameters   | Description                                                 |
 | :------------------- | :----------- | :---------------------------------------------------------- |
 | `get()`              | `none`       | Fetches the current event's leaderboard.                    |
+
+</details>
+
+<details>
+<summary><b>Activity Module Reference</b></summary>
+
+| Method               | Parameters   | Description                                                 |
+| :------------------- | :----------- | :---------------------------------------------------------- |
+| `get(params)`              | `ActivityParams`       | Gets the activity data.                    |
+| `list()`| `none`       | Fetches the current event's activities.                    |
 
 </details>
