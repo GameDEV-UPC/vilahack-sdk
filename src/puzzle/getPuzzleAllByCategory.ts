@@ -15,7 +15,7 @@ export async function getPuzzleAllByCategory(
 ): Promise<GetPuzzleAllByCategoryResponse> {
   const result = await fetchClient<Unwrap<GetPuzzleAllByCategoryResponse>>(
     config,
-    API_ROUTES.PUZZLE.GET_ALL_BY_CATEGORY,
+    API_ROUTES.PUZZLE.LIST.BY_CATEGORY,
     { method: "GET" },
   );
 

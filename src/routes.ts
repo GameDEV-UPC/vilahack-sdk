@@ -25,11 +25,19 @@ export const API_ROUTES = {
   },
   PUZZLE: {
     GET: "/puzzle",
-    GET_ALL: "/puzzle/all",
-    GET_ALL_BY_CATEGORY: "/puzzle/all/by_category",
+    LIST: {
+      ALL: "/puzzle/all",
+      BY_CATEGORY: "/puzzle/all/by_category",
+    },
     SOLVE: (id: string) => `/puzzle/${id}/solve`,
   },
   LEADERBOARD: {
     GET: "/leaderboard",
+  },
+  ACTIVITY: {
+    GET: (id: string) => `/activity/${id}`,
+    LIST: {
+      ALL: "/activity/all",
+    },
   },
 } as const;

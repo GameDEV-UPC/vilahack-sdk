@@ -18,11 +18,11 @@ export class PuzzleModule {
     return getPuzzle(this.config, params);
   }
 
-  public async getAll(): Promise<GetPuzzleAllResponse> {
+  public async list(): Promise<GetPuzzleAllResponse> {
     return getPuzzleAll(this.config);
   }
 
-  public async getAllByCategory(): Promise<GetPuzzleAllByCategoryResponse> {
+  public async listByCategory(): Promise<GetPuzzleAllByCategoryResponse> {
     return getPuzzleAllByCategory(this.config);
   }
 }

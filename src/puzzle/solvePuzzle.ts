@@ -15,9 +15,10 @@ export async function solvePuzzle(
   params: SolvePuzzleParams,
 ): Promise<SolvePuzzleResponse> {
   const queryParam: Pick<SolvePuzzleParams, "flag"> = { flag: params.flag };
+  const safeId = encodeURIComponent(params.id);
   const result = await fetchClient<Unwrap<SolvePuzzleResponse>>(
     config,
-    API_ROUTES.PUZZLE.SOLVE(params.id),
+    API_ROUTES.PUZZLE.SOLVE(safeId),
     {
       method: "PUT",
       params: queryParam,
