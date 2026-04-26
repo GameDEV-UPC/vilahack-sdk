@@ -1,4 +1,5 @@
 import type { Config } from "./config.js";
+import { LeaderboardModule } from "./leaderboard/index.js";
 import { PuzzleModule } from "./puzzle/index.js";
 import { TeamModule } from "./team/index.js";
 import { UserModule } from "./user/index.js";
@@ -7,6 +8,7 @@ export class VilahackClient {
   public user: UserModule;
   public team: TeamModule;
   public puzzle: PuzzleModule;
+  public leaderboard: LeaderboardModule;
 
   constructor(private config: Config) {
     if (!config.baseUrl) throw new Error("[VILAHACK SDK] baseUrl is required");
@@ -15,5 +17,6 @@ export class VilahackClient {
     this.user = new UserModule(this.config);
     this.team = new TeamModule(this.config);
     this.puzzle = new PuzzleModule(this.config);
+    this.leaderboard = new LeaderboardModule(this.config);
   }
 }

@@ -22,11 +22,13 @@ export const API_ROUTES = {
     JOIN: "/team/join",
     CREATE: "/team/create",
     UPDATE: "/team/update",
-    LEADERBOARD: "/team/leaderboard",
   },
   PUZZLE: {
     GET: "/puzzle",
     GET_ALL: "/puzzle/all",
     GET_ALL_BY_CATEGORY: "/puzzle/all/by_category",
+  },
+  LEADERBOARD: {
+    GET: "/leaderboard",
   },
 } as const;

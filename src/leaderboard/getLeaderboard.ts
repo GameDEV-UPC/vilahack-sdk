@@ -3,14 +3,10 @@ import { COMMON_ERRORS } from "../constants/api.js";
 import { API_ROUTES } from "../routes.js";
 import { mapServiceError } from "../utils/errorHandler.js";
 import { fetchClient } from "../utils/fetchClient.js";
-import type {
-  GetLeaderboardErrorCode,
-  GetLeaderboardResponse,
-  LeaderboardEntry,
-} from "./types.js";
+import type { GetLeaderboardErrorCode, GetLeaderboardResponse, Leaderboard } from "./types.js";
 
 export async function getLeaderboard(config: Config): Promise<GetLeaderboardResponse> {
-  const result = await fetchClient<LeaderboardEntry[]>(config, API_ROUTES.TEAM.LEADERBOARD, {
+  const result = await fetchClient<Leaderboard[]>(config, API_ROUTES.LEADERBOARD.GET, {
     method: "GET",
   });
 
