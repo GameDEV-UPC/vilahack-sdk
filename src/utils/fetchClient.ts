@@ -65,6 +65,16 @@ export async function fetchClient<T = void>(
       }
     }
 
+    const rawText = await response.text();
+    let data: T;
+
+    if (options.responseType === "json" || contentType.includes("application/json")) {
+      data = rawText ? (JSON.parse(rawText) as T) : ({} as T);
+      return { success: true, status: response.status, data };
+    } else {
+      data = rawText as unknown as T;
+    }
+
     if (
       options.responseType === "blob" ||
       contentType.includes("application/octet-stream") ||
@@ -77,15 +87,6 @@ export async function fetchClient<T = void>(
     if (options.responseType === "text") {
       const data = (await response.text()) as unknown as T;
       return { success: true, status: response.status, data };
-    }
-
-    const rawText = await response.text();
-    let data: T;
-
-    if (options.responseType === "json" || contentType.includes("application/json")) {
-      data = rawText ? (JSON.parse(rawText) as T) : ({} as T);
-    } else {
-      data = rawText as unknown as T;
     }
 
     return { success: true, status: response.status, data };
