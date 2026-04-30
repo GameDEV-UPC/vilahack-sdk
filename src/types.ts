@@ -47,7 +47,7 @@ export interface ServiceError<TCode extends string> {
   success: false;
   code: TCode | GlobalError;
   message?: string;
-  rawError: ApiErrorResponse;
+  rawError?: ApiErrorResponse;
 }
 
 export type ServiceResponse<TData, TCode extends string = never> =

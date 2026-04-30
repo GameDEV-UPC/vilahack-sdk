@@ -26,7 +26,7 @@ export interface Puzzle {
 
 export type PuzzleByCategoryMap = Record<Category, Puzzle[]>;
 
-export interface GetPuzzleParams {
+export interface PuzzleParams {
   id: string;
 }
 
@@ -39,6 +39,7 @@ export type GetPuzzleErrorCode = GlobalError | "PUZZLE_NOT_FOUND";
 export type GetPuzzleAllErrorCode = GlobalError;
 export type GetPuzzleAllByCategoryErrorCode = GlobalError;
 export type SolvePuzzleErrorCode = GlobalError;
+export type GetPuzzleFilesErrorCode = GlobalError | "NOT_IN_NETWORK" | "PUZZLE_NOT_FOUND";
 
 export type GetPuzzleResponse = ServiceResponse<Puzzle, GetPuzzleErrorCode>;
 export type GetPuzzleAllResponse = ServiceResponse<Puzzle[], GetPuzzleAllErrorCode>;
@@ -47,3 +48,4 @@ export type GetPuzzleAllByCategoryResponse = ServiceResponse<
   GetPuzzleAllByCategoryErrorCode
 >;
 export type SolvePuzzleResponse = ServiceResponse<boolean, GlobalError>;
+export type GetPuzzleFilesResponse = ServiceResponse<Blob, GetPuzzleFilesErrorCode>;

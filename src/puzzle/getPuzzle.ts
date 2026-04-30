@@ -4,17 +4,14 @@ import { API_ROUTES } from "../routes.js";
 import type { Unwrap } from "../types.js";
 import { mapServiceError } from "../utils/errorHandler.js";
 import { fetchClient } from "../utils/fetchClient.js";
-import type { GetPuzzleErrorCode, GetPuzzleParams, GetPuzzleResponse } from "./types.js";
+import type { GetPuzzleErrorCode, PuzzleParams, GetPuzzleResponse } from "./types.js";
 
 const GET_PUZZLE_ERRORS: Record<number, GetPuzzleErrorCode> = {
   ...COMMON_ERRORS,
   404: "PUZZLE_NOT_FOUND",
 };
 
-export async function getPuzzle(
-  config: Config,
-  params: GetPuzzleParams,
-): Promise<GetPuzzleResponse> {
+export async function getPuzzle(config: Config, params: PuzzleParams): Promise<GetPuzzleResponse> {
   const result = await fetchClient<Unwrap<GetPuzzleResponse>>(config, API_ROUTES.PUZZLE.GET, {
     method: "GET",
     params: params,

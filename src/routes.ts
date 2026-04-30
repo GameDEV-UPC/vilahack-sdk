@@ -30,6 +30,7 @@ export const API_ROUTES = {
       BY_CATEGORY: "/puzzle/all/by_category",
     },
     SOLVE: (id: string) => `/puzzle/${id}/solve`,
+    FILES: "/puzzle/files",
   },
   LEADERBOARD: {
     GET: "/leaderboard",
