@@ -16,14 +16,14 @@ export async function getPuzzleFiles(
   config: Config,
   params: PuzzleParams,
 ): Promise<GetPuzzleFilesResponse> {
-  const MAX_ATTEMPTS = 20;
+  const MAX_ATTEMPTS = 30;
   let attempts = 0;
 
   while (attempts < MAX_ATTEMPTS) {
     const result = await fetchClient<Unwrap<GetPuzzleFilesResponse>>(
       config,
       API_ROUTES.PUZZLE.FILES,
-      { method: "GET", responseType: "blob", params: params },
+      { method: "GET", params: params },
     );
 
     if (!result.success) {
