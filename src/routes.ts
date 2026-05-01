@@ -29,7 +29,11 @@ export const API_ROUTES = {
       ALL: "/puzzle/all",
       BY_CATEGORY: "/puzzle/all/by_category",
     },
-    SOLVE: (id: string) => `/puzzle/${id}/solve`,
+    SOLVE: "/puzzle/solve",
+    FILES: "/puzzle/files",
+    CLUE: {
+      NEXT: "/puzzle/clue/next",
+    },
   },
   LEADERBOARD: {
     GET: "/leaderboard",

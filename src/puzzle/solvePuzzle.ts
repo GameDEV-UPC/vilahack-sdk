@@ -8,22 +8,18 @@ import type { SolvePuzzleErrorCode, SolvePuzzleParams, SolvePuzzleResponse } fro
 
 const SOLVE_PUZZLE_ERRORS: Record<number, SolvePuzzleErrorCode> = {
   ...COMMON_ERRORS,
+  401: "NOT_IN_NETWORK",
+  406: "INCORRECT_FLAG",
 };
 
 export async function solvePuzzle(
   config: Config,
   params: SolvePuzzleParams,
 ): Promise<SolvePuzzleResponse> {
-  const queryParam: Pick<SolvePuzzleParams, "flag"> = { flag: params.flag };
-  const safeId = encodeURIComponent(params.id);
-  const result = await fetchClient<Unwrap<SolvePuzzleResponse>>(
-    config,
-    API_ROUTES.PUZZLE.SOLVE(safeId),
-    {
-      method: "PUT",
-      params: queryParam,
-    },
-  );
+  const result = await fetchClient<Unwrap<SolvePuzzleResponse>>(config, API_ROUTES.PUZZLE.SOLVE, {
+    method: "POST",
+    params: params,
+  });
 
   if (!result.success) {
     return mapServiceError<SolvePuzzleErrorCode>(result, SOLVE_PUZZLE_ERRORS);
