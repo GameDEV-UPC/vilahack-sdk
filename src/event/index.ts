@@ -12,7 +12,7 @@ import type {
 export class EventModule {
   constructor(private config: Config) {}
 
-  public async listAll(): Promise<ListEventsResponse> {
+  public async list(): Promise<ListEventsResponse> {
     return listAllEvents(this.config);
   }
 
