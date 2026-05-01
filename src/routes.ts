@@ -38,10 +38,10 @@ export const API_ROUTES = {
   LEADERBOARD: {
     GET: "/leaderboard",
   },
-  ACTIVITY: {
-    GET: (id: string) => `/activity/${id}`,
+  EVENT: {
     LIST: {
-      ALL: "/activity/all",
+      ALL: "/event/all",
     },
+    PARTICIPATE: "/event/participate",
   },
 } as const;

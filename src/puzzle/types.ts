@@ -22,6 +22,7 @@ export interface Puzzle {
   clues: string[];
   start: string | null;
   end: string | null;
+  solved: boolean;
 }
 
 export type PuzzleByCategoryMap = Record<Category, Puzzle[]>;
