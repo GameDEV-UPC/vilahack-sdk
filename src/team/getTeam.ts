@@ -1,9 +1,10 @@
 import type { Config } from "../config.js";
 import { COMMON_ERRORS } from "../constants/api.js";
 import { API_ROUTES } from "../routes.js";
+import type { Unwrap } from "../types.js";
 import { mapServiceError } from "../utils/errorHandler.js";
 import { fetchClient } from "../utils/fetchClient.js";
-import type { GetTeamErrorCode, GetTeamResponse, TeamResponse } from "./types.js";
+import type { GetTeamErrorCode, GetTeamResponse } from "./types.js";
 
 const GET_TEAM_ERRORS: Record<number, GetTeamErrorCode> = {
   ...COMMON_ERRORS,
@@ -11,7 +12,7 @@ const GET_TEAM_ERRORS: Record<number, GetTeamErrorCode> = {
 };
 
 export async function getTeam(config: Config): Promise<GetTeamResponse> {
-  const result = await fetchClient<TeamResponse>(config, API_ROUTES.TEAM.GET, {
+  const result = await fetchClient<Unwrap<GetTeamResponse>>(config, API_ROUTES.TEAM.GET, {
     method: "GET",
   });
 

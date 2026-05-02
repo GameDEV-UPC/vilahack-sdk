@@ -64,32 +64,26 @@ export async function fetchClient<T = void>(
         };
       }
     }
-
     if (
       options.responseType === "blob" ||
       contentType.includes("application/octet-stream") ||
-      contentType.includes("application/gzip")
+      contentType.includes("application/gzip") ||
+      contentType.includes("application/tar+gzip")
     ) {
       const data = (await response.blob()) as unknown as T;
       return { success: true, status: response.status, data };
     }
 
-    if (options.responseType === "text") {
-      const data = (await response.text()) as unknown as T;
+    const rawText = await response.text();
+
+    if (options.responseType === "json" || contentType.includes("application/json")) {
+      const data = rawText ? (JSON.parse(rawText) as T) : ({} as T);
       return { success: true, status: response.status, data };
     }
 
-    const rawText = await response.text();
-    let data: T;
-
-    if (options.responseType === "json" || contentType.includes("application/json")) {
-      data = rawText ? (JSON.parse(rawText) as T) : ({} as T);
-    } else {
-      data = rawText as unknown as T;
-    }
-
-    return { success: true, status: response.status, data };
+    return { success: true, status: response.status, data: rawText as unknown as T };
   } catch (error) {
+    console.error("FetchClient Exception:", error);
     return {
       success: false,
       status: 503,

@@ -4,23 +4,23 @@ import { API_ROUTES } from "../routes.js";
 import type { Unwrap } from "../types.js";
 import { mapServiceError } from "../utils/errorHandler.js";
 import { fetchClient } from "../utils/fetchClient.js";
-import type { GetPuzzleAllErrorCode, GetPuzzleAllResponse } from "./types.js";
+import type { GetLeaderboardErrorCode, GetLeaderboardResponse } from "./types.js";
 
-const GET_PUZZLE_ALL_ERRORS: Record<number, GetPuzzleAllErrorCode> = {
+const GET_LEADERBOARD_ERRORS: Record<number, GetLeaderboardErrorCode> = {
   ...COMMON_ERRORS,
 };
 
-export async function getPuzzleAll(config: Config): Promise<GetPuzzleAllResponse> {
-  const result = await fetchClient<Unwrap<GetPuzzleAllResponse>>(
+export async function getLeaderboard(config: Config): Promise<GetLeaderboardResponse> {
+  const result = await fetchClient<Unwrap<GetLeaderboardResponse>>(
     config,
-    API_ROUTES.PUZZLE.LIST.ALL,
+    API_ROUTES.LEADERBOARD.GET,
     {
       method: "GET",
     },
   );
 
   if (!result.success) {
-    return mapServiceError<GetPuzzleAllErrorCode>(result, GET_PUZZLE_ALL_ERRORS);
+    return mapServiceError<GetLeaderboardErrorCode>(result, GET_LEADERBOARD_ERRORS);
   }
 
   return { success: true, data: result.data };

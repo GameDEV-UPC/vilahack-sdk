@@ -25,9 +25,18 @@ export type DatabaseErrorType =
   | "constraint_violation"
   | "unknown";
 
+export type PuzzleErrorType =
+  | "io"
+  | "generator"
+  | "files_missing"
+  | "not_found"
+  | "processing"
+  | "incorrect_flag";
+
 export type ErrorDetail =
   | { authentication: AuthErrorType }
   | { database: DatabaseErrorType }
+  | { puzzle: PuzzleErrorType }
   | "internal";
 
 export interface ApiErrorResponse {
@@ -47,9 +56,14 @@ export interface ServiceError<TCode extends string> {
   success: false;
   code: TCode | GlobalError;
   message?: string;
-  rawError: ApiErrorResponse;
+  rawError?: ApiErrorResponse;
 }
 
 export type ServiceResponse<TData, TCode extends string = never> =
   | { success: true; data: TData }
   | ServiceError<TCode>;
+
+export type Unwrap<T extends { success: boolean; data?: any }> = Extract<
+  T,
+  { success: true }
+>["data"];
