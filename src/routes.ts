@@ -39,9 +39,13 @@ export const API_ROUTES = {
     GET: "/leaderboard",
   },
   EVENT: {
+    GET: "/event",
     LIST: {
       ALL: "/event/all",
     },
-    PARTICIPATE: "/event/participate",
+    PARTICIPATION: {
+      SUBMIT: "/event/participation",
+      LIST: "/event/participation/all",
+    },
   },
 } as const;

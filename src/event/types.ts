@@ -8,13 +8,12 @@ export interface Event {
   ends_at?: string;
 }
 
-export interface ParticipateEventParams {
-  user: string;
-  event: string;
+export interface GetEventParams {
+  id: string;
 }
 
 export type ListEventsErrorCode = GlobalError;
-export type ParticipateEventErrorCode = GlobalError | "EVENT_NOT_FOUND" | "ALREADY_PARTICIPATED";
+export type GetEventErrorCode = GlobalError | "EVENT_NOT_FOUND";
 
 export type ListEventsResponse = ServiceResponse<Event[], ListEventsErrorCode>;
-export type ParticipateEventResponse = ServiceResponse<void, ParticipateEventErrorCode>;
+export type GetEventResponse = ServiceResponse<Event, GetEventErrorCode>;
