@@ -1,7 +1,7 @@
 export * from "./types.js";
 
 import type { Config } from "../config.js";
-import { getNextClue } from "./getNextClue.js";
+import { requestNextClue } from "./getNextClue.js";
 import { getPuzzle } from "./getPuzzle.js";
 import { getPuzzleAll } from "./getPuzzleAll.js";
 import { getPuzzleAllByCategory } from "./getPuzzleAllByCategory.js";
@@ -15,7 +15,7 @@ import type {
   GetPuzzleFilesResponse,
   SolvePuzzleResponse,
   SolvePuzzleParams,
-  GetNextClueResponse,
+  RequestNextClueResponse,
 } from "./types.js";
 
 export class PuzzleModule {
@@ -41,7 +41,7 @@ export class PuzzleModule {
     return getPuzzleFiles(this.config, params);
   }
 
-  public async getNextClue(params: PuzzleParams): Promise<GetNextClueResponse> {
-    return getNextClue(this.config, params);
+  public async requestNextClue(params: PuzzleParams): Promise<RequestNextClueResponse> {
+    return requestNextClue(this.config, params);
   }
 }

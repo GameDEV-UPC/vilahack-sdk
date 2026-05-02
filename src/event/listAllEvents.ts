@@ -4,23 +4,23 @@ import { API_ROUTES } from "../routes.js";
 import type { Unwrap } from "../types.js";
 import { mapServiceError } from "../utils/errorHandler.js";
 import { fetchClient } from "../utils/fetchClient.js";
-import type { ListActivitiesErrorCode, ListActivitiesResponse } from "./types.js";
+import type { ListEventsErrorCode, ListEventsResponse } from "./types.js";
 
-const LIST_ACTIVITIES_ERROR: Record<number, ListActivitiesErrorCode> = {
+const LIST_EVENTS_ERROR: Record<number, ListEventsErrorCode> = {
   ...COMMON_ERRORS,
 };
 
-export async function listAllActivities(config: Config): Promise<ListActivitiesResponse> {
-  const response = await fetchClient<Unwrap<ListActivitiesResponse>>(
+export async function listAllEvents(config: Config): Promise<ListEventsResponse> {
+  const response = await fetchClient<Unwrap<ListEventsResponse>>(
     config,
-    API_ROUTES.ACTIVITY.LIST.ALL,
+    API_ROUTES.EVENT.LIST.ALL,
     {
       method: "GET",
     },
   );
 
   if (!response.success) {
-    return mapServiceError<ListActivitiesErrorCode>(response, LIST_ACTIVITIES_ERROR);
+    return mapServiceError<ListEventsErrorCode>(response, LIST_EVENTS_ERROR);
   }
 
   return { success: true, data: response.data };

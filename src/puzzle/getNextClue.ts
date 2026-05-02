@@ -4,27 +4,27 @@ import { API_ROUTES } from "../routes.js";
 import type { Unwrap } from "../types.js";
 import { mapServiceError } from "../utils/errorHandler.js";
 import { fetchClient } from "../utils/fetchClient.js";
-import type { GetNextClueErrorCode, GetNextClueResponse, PuzzleParams } from "./types.js";
+import type { RequestNextClueErrorCode, RequestNextClueResponse, PuzzleParams } from "./types.js";
 
-const GET_NEXT_CLUE_ERRORS: Record<number, GetNextClueErrorCode> = {
+const GET_NEXT_CLUE_ERRORS: Record<number, RequestNextClueErrorCode> = {
   ...COMMON_ERRORS,
 };
 
-export async function getNextClue(
+export async function requestNextClue(
   config: Config,
   params: PuzzleParams,
-): Promise<GetNextClueResponse> {
-  const result = await fetchClient<Unwrap<GetNextClueResponse>>(
+): Promise<RequestNextClueResponse> {
+  const result = await fetchClient<Unwrap<RequestNextClueResponse>>(
     config,
     API_ROUTES.PUZZLE.CLUE.NEXT,
     {
-      method: "GET",
+      method: "POST",
       params: params,
     },
   );
 
   if (!result.success) {
-    return mapServiceError<GetNextClueErrorCode>(result, GET_NEXT_CLUE_ERRORS);
+    return mapServiceError<RequestNextClueErrorCode>(result, GET_NEXT_CLUE_ERRORS);
   }
 
   return { success: true, data: result.data };

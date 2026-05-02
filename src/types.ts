@@ -25,9 +25,18 @@ export type DatabaseErrorType =
   | "constraint_violation"
   | "unknown";
 
+export type PuzzleErrorType =
+  | "io"
+  | "generator"
+  | "files_missing"
+  | "not_found"
+  | "processing"
+  | "incorrect_flag";
+
 export type ErrorDetail =
   | { authentication: AuthErrorType }
   | { database: DatabaseErrorType }
+  | { puzzle: PuzzleErrorType }
   | "internal";
 
 export interface ApiErrorResponse {
