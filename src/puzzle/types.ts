@@ -41,7 +41,7 @@ export type GetPuzzleAllErrorCode = GlobalError;
 export type GetPuzzleAllByCategoryErrorCode = GlobalError;
 export type SolvePuzzleErrorCode = GlobalError | "NOT_IN_NETWORK" | "INCORRECT_FLAG";
 export type GetPuzzleFilesErrorCode = GlobalError | "NOT_IN_NETWORK" | "PUZZLE_NOT_FOUND";
-export type GetNextClueErrorCode = GlobalError;
+export type RequestNextClueErrorCode = GlobalError;
 
 export type GetPuzzleResponse = ServiceResponse<Puzzle, GetPuzzleErrorCode>;
 export type GetPuzzleAllResponse = ServiceResponse<Puzzle[], GetPuzzleAllErrorCode>;
@@ -51,4 +51,4 @@ export type GetPuzzleAllByCategoryResponse = ServiceResponse<
 >;
 export type SolvePuzzleResponse = ServiceResponse<boolean, SolvePuzzleErrorCode>;
 export type GetPuzzleFilesResponse = ServiceResponse<Blob, GetPuzzleFilesErrorCode>;
-export type GetNextClueResponse = ServiceResponse<Puzzle, GetNextClueErrorCode>;
+export type RequestNextClueResponse = ServiceResponse<number, RequestNextClueErrorCode>;
