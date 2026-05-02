@@ -28,12 +28,17 @@ export async function submitParticipation(
   );
 
   if (!response.success) {
-    if (response.status === 412) {
+    const localErrors = { ...SUBMIT_PARTICIPATION_ERRORS };
+
+    if (response.status === 412 && response.error?.message) {
       const msg = response.error.message.toLowerCase();
-      if (msg.includes("duplicate key value"))
-        SUBMIT_PARTICIPATION_ERRORS[412] = "ALREADY_PARTICIPATED";
-      else SUBMIT_PARTICIPATION_ERRORS[412] = "EVENT_NOT_FOUND";
+      if (msg.includes("duplicate key value")) {
+        localErrors[412] = "ALREADY_PARTICIPATED";
+      } else {
+        localErrors[412] = "EVENT_NOT_FOUND";
+      }
     }
+
     return mapServiceError<SubmitParticipationErrorCode>(response, SUBMIT_PARTICIPATION_ERRORS);
   }
 

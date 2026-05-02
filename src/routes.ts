@@ -44,8 +44,8 @@ export const API_ROUTES = {
       ALL: "/event/all",
     },
     PARTICIPATION: {
-      SUBMIT: "/event/participate",
-      LIST: "/event/participate/all",
+      SUBMIT: "/event/participation",
+      LIST: "/event/participation/all",
     },
   },
 } as const;
