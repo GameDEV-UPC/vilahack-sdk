@@ -2,6 +2,7 @@ import type { GlobalError, ServiceResponse } from "../types.js";
 
 export interface Event {
   id: string;
+  name: string;
   description: string;
   location: string;
   begins_at: string;
