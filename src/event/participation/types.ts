@@ -13,7 +13,8 @@ export interface SubmitParticipationParams {
 }
 
 export interface ListParticipationParams {
-  id?: string;
+  user?: string;
+  event?: string;
 }
 
 export type SubmitParticipationErrorCode = GlobalError | "EVENT_NOT_FOUND" | "ALREADY_PARTICIPATED";
