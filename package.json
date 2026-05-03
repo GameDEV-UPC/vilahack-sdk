@@ -47,6 +47,11 @@
       "types": "./dist/event/index.d.ts",
       "import": "./dist/event/index.js",
       "default": "./dist/event/index.js"
+    },
+    "./event/participation": {
+      "types": "./dist/event/participation/index.d.ts",
+      "import": "./dist/event/participation/index.js",
+      "default": "./dist/event/participation/index.js"
     }
   },
   "scripts": {
