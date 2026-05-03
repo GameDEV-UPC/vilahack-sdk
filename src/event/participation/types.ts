@@ -1,10 +1,16 @@
 import type { GlobalError, ServiceResponse } from "../../types.js";
 
-export interface Participation {
-  event: string;
+export interface EventParticipationSummary {
+  id: string;
   name: string;
-  began_at: string;
-  participated_at: string;
+  started: string;
+}
+
+export interface UserParticipationSummary {}
+
+export interface Participation {
+  event: EventParticipationSummary;
+  user: UserParticipationSummary;
 }
 
 export interface SubmitParticipationParams {
