@@ -2,7 +2,7 @@
   "name": "@gamedev.upc/vilahack-sdk",
   "author": "Joel Esteller Planesas",
   "organization": "GameDEV-UPC",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "description": "The official TypeScript SDK for Vilahack",
   "type": "module",
   "main": "dist/index.js",
@@ -47,6 +47,11 @@
       "types": "./dist/event/index.d.ts",
       "import": "./dist/event/index.js",
       "default": "./dist/event/index.js"
+    },
+    "./event/participation": {
+      "types": "./dist/event/participation/index.d.ts",
+      "import": "./dist/event/participation/index.js",
+      "default": "./dist/event/participation/index.js"
     }
   },
   "scripts": {
