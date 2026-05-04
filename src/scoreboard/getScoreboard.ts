@@ -13,7 +13,7 @@ const GET_SCOREBOARD_ERRORS: Record<number, GetScoreboardErrorCode> = {
 export async function getScoreboard(config: Config): Promise<GetScoreboardResponse> {
   const result = await fetchClient<Unwrap<GetScoreboardResponse>>(
     config,
-    API_ROUTES.LEADERBOARD.GET,
+    API_ROUTES.SCOREBOARD.GET,
     {
       method: "GET",
     },
