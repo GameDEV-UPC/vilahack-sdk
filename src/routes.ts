@@ -35,8 +35,8 @@ export const API_ROUTES = {
       NEXT: "/puzzle/clue/next",
     },
   },
-  LEADERBOARD: {
-    GET: "/leaderboard",
+  SCOREBOARD: {
+    GET: "/scoreboard",
   },
   EVENT: {
     GET: "/event",
