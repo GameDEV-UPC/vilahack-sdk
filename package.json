@@ -38,10 +38,10 @@
       "import": "./dist/puzzle/index.js",
       "default": "./dist/puzzle/index.js"
     },
-    "./leaderboard": {
-      "types": "./dist/leaderboard/index.d.ts",
-      "import": "./dist/leaderboard/index.js",
-      "default": "./dist/leaderboard/index.js"
+    "./scoreboard": {
+      "types": "./dist/scoreboard/index.d.ts",
+      "import": "./dist/scoreboard/index.js",
+      "default": "./dist/scoreboard/index.js"
     },
     "./event": {
       "types": "./dist/event/index.d.ts",
