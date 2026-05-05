@@ -48,4 +48,7 @@ export const API_ROUTES = {
       LIST: "/event/participation/all",
     },
   },
+  SUSPICIOUS: {
+    GET: "/suspicious",
+  },
 } as const;
