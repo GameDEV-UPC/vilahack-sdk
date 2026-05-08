@@ -1,6 +1,7 @@
 import type { GlobalError, ServiceResponse } from "../types.js";
 
 export interface Scoreboard {
+  id: string;
   name: string;
   score: number;
 }
