@@ -39,7 +39,7 @@ export async function submitParticipation(
       }
     }
 
-    return mapServiceError<SubmitParticipationErrorCode>(response, SUBMIT_PARTICIPATION_ERRORS);
+    return mapServiceError<SubmitParticipationErrorCode>(response, localErrors);
   }
 
   return { success: true, data: response.data };
