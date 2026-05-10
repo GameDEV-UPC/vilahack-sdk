@@ -12,6 +12,9 @@ export interface TeamParams {
 export interface JoinTeamParams {
   id: string;
 }
+export interface GetTeamParams {
+  id?: string;
+}
 
 export type CreateTeamErrorCode = GlobalError | "TEAM_ALREADY_EXISTS";
 export type GetTeamErrorCode = GlobalError | "TEAM_NOT_FOUND";

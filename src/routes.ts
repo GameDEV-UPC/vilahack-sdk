@@ -20,7 +20,7 @@ export const API_ROUTES = {
     GET: "/team",
     LEAVE: "/team/leave",
     JOIN: "/team/join",
-    CREATE: "/team/create",
+    CREATE: "/team",
     UPDATE: "/team/update",
   },
   PUZZLE: {
@@ -35,13 +35,17 @@ export const API_ROUTES = {
       NEXT: "/puzzle/clue/next",
     },
   },
-  LEADERBOARD: {
-    GET: "/leaderboard",
+  SCOREBOARD: {
+    GET: "/scoreboard",
   },
   EVENT: {
+    GET: "/event",
     LIST: {
       ALL: "/event/all",
     },
-    PARTICIPATE: "/event/participate",
+    PARTICIPATION: {
+      SUBMIT: "/event/participation",
+      LIST: "/event/participation/all",
+    },
   },
 } as const;

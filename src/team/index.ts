@@ -13,14 +13,15 @@ import type {
   JoinTeamResponse,
   LeaveTeamResponse,
   UpdateTeamResponse,
+  GetTeamParams,
 } from "./types.js";
 import { updateTeam } from "./updateTeam.js";
 
 export class TeamModule {
   constructor(private config: Config) {}
 
-  public async get(): Promise<GetTeamResponse> {
-    return getTeam(this.config);
+  public async get(params?: GetTeamParams): Promise<GetTeamResponse> {
+    return getTeam(this.config, params);
   }
 
   public async leave(): Promise<LeaveTeamResponse> {

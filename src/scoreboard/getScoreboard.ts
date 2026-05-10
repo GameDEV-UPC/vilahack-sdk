@@ -4,23 +4,23 @@ import { API_ROUTES } from "../routes.js";
 import type { Unwrap } from "../types.js";
 import { mapServiceError } from "../utils/errorHandler.js";
 import { fetchClient } from "../utils/fetchClient.js";
-import type { GetLeaderboardErrorCode, GetLeaderboardResponse } from "./types.js";
+import type { GetScoreboardErrorCode, GetScoreboardResponse } from "./types.js";
 
-const GET_LEADERBOARD_ERRORS: Record<number, GetLeaderboardErrorCode> = {
+const GET_SCOREBOARD_ERRORS: Record<number, GetScoreboardErrorCode> = {
   ...COMMON_ERRORS,
 };
 
-export async function getLeaderboard(config: Config): Promise<GetLeaderboardResponse> {
-  const result = await fetchClient<Unwrap<GetLeaderboardResponse>>(
+export async function getScoreboard(config: Config): Promise<GetScoreboardResponse> {
+  const result = await fetchClient<Unwrap<GetScoreboardResponse>>(
     config,
-    API_ROUTES.LEADERBOARD.GET,
+    API_ROUTES.SCOREBOARD.GET,
     {
       method: "GET",
     },
   );
 
   if (!result.success) {
-    return mapServiceError<GetLeaderboardErrorCode>(result, GET_LEADERBOARD_ERRORS);
+    return mapServiceError<GetScoreboardErrorCode>(result, GET_SCOREBOARD_ERRORS);
   }
 
   return { success: true, data: result.data };
