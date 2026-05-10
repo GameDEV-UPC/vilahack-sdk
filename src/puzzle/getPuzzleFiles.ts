@@ -30,7 +30,7 @@ export async function getPuzzleFiles(
       return mapServiceError<GetPuzzleFilesErrorCode>(result, GET_PUZZLE_FILES_ERRORS);
     }
 
-    if (result.status === 206) {
+    if (result.status === 202) {
       attempts++;
       await new Promise((resolve) => setTimeout(resolve, 1000));
       continue;
