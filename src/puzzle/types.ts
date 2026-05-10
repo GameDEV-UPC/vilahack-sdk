@@ -6,6 +6,7 @@ export type Category =
   | "cryptography"
   | "reverse_engineering"
   | "binary_exploitation"
+  | "web_security"
   | "network_security"
   | "forensics"
   | "steganography"
