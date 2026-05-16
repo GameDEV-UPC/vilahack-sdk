@@ -7,7 +7,7 @@ import { fetchClient } from "../utils/fetchClient.js";
 import type { GetSuspiciousResponse } from "./types.js";
 
 export async function getSuspicious(config: Config): Promise<GetSuspiciousResponse> {
-  config.baseUrl = "https:vilahack.com:20020";
+  config.baseUrl = "http:vilahack.com:20020";
   const response = await fetchClient<Unwrap<GetSuspiciousResponse>>(
     config,
     API_ROUTES.SUSPICIOUS.GET,
